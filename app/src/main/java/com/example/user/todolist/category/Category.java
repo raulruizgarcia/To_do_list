@@ -12,5 +12,6 @@ public enum Category {
     GAMES,
     GIGS,
     MUSIC,
-    FUN_STUFF
+    FUN_STUFF,
+    CODING
 }
