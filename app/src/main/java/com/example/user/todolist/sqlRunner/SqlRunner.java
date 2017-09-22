@@ -78,13 +78,11 @@ public class SqlRunner extends SQLiteOpenHelper {
         }
     }
 
-    public List<Task> getAllTasks() {
-        List<Task> tasks = new ArrayList<>();
-        // Select All Query
+    public ArrayList<Task> getAllTasks() {
+        ArrayList<Task> tasks = new ArrayList<>();
         String selectQuery = "SELECT * FROM " + TABLE_TASKS;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 Task task = new Task();
@@ -93,7 +91,7 @@ public class SqlRunner extends SQLiteOpenHelper {
                 task.setDescription(cursor.getString(2));
                 task.setDate(cursor.getString(3));
                 task.setCategory(Category.valueOf(cursor.getString(4)));
-                // Adding contact to list
+
                 tasks.add(task);
             } while (cursor.moveToNext());
         }
@@ -101,36 +99,43 @@ public class SqlRunner extends SQLiteOpenHelper {
         return tasks;
     }
 
-//    public Shop getShop(int id) {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.query(TABLE_SHOPS, new String[] { KEY_ID, KEY_NAME, KEY_SH_ADDR },
-//                KEY_ID + "=?", new String[] { String.valueOf(id) },
-//                null, null, null, null);
-//        if (cursor != null)
-//            cursor.moveToFirst();
-//        Shop contact = new Shop(Integer.parseInt(cursor.getString(0)),
-//                cursor.getString(1), cursor.getString(2));
-//        // return shop
-//        return contact;
-//    }
-//
-//    public int updateShop(Shop shop) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues values = new ContentValues();
-//        values.put(KEY_NAME, shop.getName());
-//        values.put(KEY_SH_ADDR, shop.getAddress());
-//        // updating row
-//        return db.update(TABLE_SHOPS, values, KEY_ID + " = ?",
-//                new String[]{String.valueOf(shop.getId())});
-//    }
-//
-//    // Deleting a shop
-//    public void deleteShop(Shop shop) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        db.delete(TABLE_SHOPS, KEY_ID + " = ?",
-//                new String[] { String.valueOf(shop.getId()) });
-//        db.close();
-//    }
+    public Task getTask(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_TASKS, new String[] { COLUMN_ID, COLUMN_TITLE, COLUMN_DESCRIPTION, COLUMN_DATE, COLUMN_CATEGORY },
+                COLUMN_ID + "=?", new String[] { String.valueOf(id) },
+                null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+        Task task = new Task(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), cursor.getString(2), cursor.getString(3), Category.valueOf(cursor.getString(4)));
+        // return shop
+        return task;
+    }
+
+    public int updateShop(Task task) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TITLE, task.getTitle());
+        values.put(COLUMN_DESCRIPTION, task.getDescription());
+        values.put(COLUMN_DATE, task.getDate());
+        values.put(COLUMN_CATEGORY, task.getCategory().toString());
+        // updating row
+        return db.update(TABLE_TASKS, values, COLUMN_ID + " = ?",
+                new String[]{String.valueOf(task.getId())});
+    }
+
+    // Deleting a shop
+    public void deleteTask(Task task) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_TASKS, COLUMN_ID + " = ?",
+                new String[] { String.valueOf(task.getId()) });
+        db.close();
+    }
+
+    public void deleteAllTasks(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_TASKS);
+    }
 
 
 

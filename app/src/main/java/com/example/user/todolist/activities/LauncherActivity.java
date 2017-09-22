@@ -9,6 +9,14 @@ import com.example.user.todolist.category.Category;
 import com.example.user.todolist.sqlRunner.SqlRunner;
 import com.example.user.todolist.task.Task;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.SimpleTimeZone;
+
 public class LauncherActivity extends AppCompatActivity {
 
     // Database Version
@@ -22,12 +30,19 @@ public class LauncherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
 
-        Task task = new Task("The newly added task" , "some descri", "a date whatever");
-
-        Log.d("task before saving", String.valueOf(task.getId()));
+//        Task task = new Task("Another complete task" , "description...", "a date whatever", Category.ADULT_STUFF);
         SqlRunner sqlRunner = new SqlRunner(this);
-        sqlRunner.save(task);
-        Log.d("task after saving", String.valueOf(task.getId()));
+
+        Task task = sqlRunner.getTask(2);
+        sqlRunner.deleteTask(task);
+
+
+
+        ArrayList<Task> tasks = sqlRunner.getAllTasks();
+        for (Task currentTask: tasks){
+            System.out.println("Task ID: " + currentTask.getId());
+            System.out.println("Task ID: " + currentTask.getTitle());
+        }
 
 
 

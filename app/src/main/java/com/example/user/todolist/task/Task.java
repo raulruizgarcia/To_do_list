@@ -13,7 +13,7 @@ public class Task {
     private Category category;
 
     public Task(){
-        
+
     }
 
     public Task(String title, String description, String date, Category category) {
@@ -27,6 +27,14 @@ public class Task {
         this.title = title;
         this.description = description;
         this.date = date;
+    }
+
+    public Task(int id, String title, String description, String date, Category category){
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        this.category = category;
     }
 
     public int getId() {
