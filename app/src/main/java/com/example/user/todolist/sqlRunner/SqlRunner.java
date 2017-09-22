@@ -60,14 +60,20 @@ public class SqlRunner extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_TITLE, task.getTitle());
         contentValues.put(COLUMN_DESCRIPTION, task.getDescription());
-        contentValues.put(COLUMN_DATE, task.getDate());
-        contentValues.put(COLUMN_CATEGORY, task.getCategory().toString());
+
+        if (task.getDate() != null) {
+            contentValues.put(COLUMN_DATE, task.getDate());
+        }
+        if (task.getCategory() != null) {
+            contentValues.put(COLUMN_CATEGORY, task.getCategory().toString());
+        }
 
         long result = db.insert(TABLE_TASKS, null, contentValues);
         if (result == -1) {
             return false;
         }
         else {
+            task.setId((int) (long) result);
             return true;
         }
     }
@@ -95,10 +101,38 @@ public class SqlRunner extends SQLiteOpenHelper {
         return tasks;
     }
 
-    public void execQuery(String query){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL(query);
-    }
+//    public Shop getShop(int id) {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.query(TABLE_SHOPS, new String[] { KEY_ID, KEY_NAME, KEY_SH_ADDR },
+//                KEY_ID + "=?", new String[] { String.valueOf(id) },
+//                null, null, null, null);
+//        if (cursor != null)
+//            cursor.moveToFirst();
+//        Shop contact = new Shop(Integer.parseInt(cursor.getString(0)),
+//                cursor.getString(1), cursor.getString(2));
+//        // return shop
+//        return contact;
+//    }
+//
+//    public int updateShop(Shop shop) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put(KEY_NAME, shop.getName());
+//        values.put(KEY_SH_ADDR, shop.getAddress());
+//        // updating row
+//        return db.update(TABLE_SHOPS, values, KEY_ID + " = ?",
+//                new String[]{String.valueOf(shop.getId())});
+//    }
+//
+//    // Deleting a shop
+//    public void deleteShop(Shop shop) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        db.delete(TABLE_SHOPS, KEY_ID + " = ?",
+//                new String[] { String.valueOf(shop.getId()) });
+//        db.close();
+//    }
+
+
 
 
 }

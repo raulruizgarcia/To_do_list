@@ -2,6 +2,7 @@ package com.example.user.todolist.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.user.todolist.R;
 import com.example.user.todolist.category.Category;
@@ -21,10 +22,14 @@ public class LauncherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
 
-//        Task task = new Task("Task title", "task description", "The date", Category.ADULT_STUFF);
-//        SqlRunner sqlRunner = new SqlRunner(this);
-//
-//        sqlRunner.save(task);
-//        System.out.println(sqlRunner.getAllTasks());
+        Task task = new Task("The newly added task" , "some descri", "a date whatever");
+
+        Log.d("task before saving", String.valueOf(task.getId()));
+        SqlRunner sqlRunner = new SqlRunner(this);
+        sqlRunner.save(task);
+        Log.d("task after saving", String.valueOf(task.getId()));
+
+
+
     }
 }
