@@ -1,6 +1,7 @@
 package com.example.user.todolist.sqlRunner;
 
 
+import android.app.DownloadManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -20,9 +21,9 @@ public class SqlRunner extends SQLiteOpenHelper {
     // Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
-    private static final String DATABASE_NAME = "taskDb";
+    private static final String DATABASE_NAME = "taskdb";
     // Contacts table name
-    private static final String TABLE_TASKS = "tasks";
+    private static final String TABLE_TASKS = "tasks_table";
     // Shops Table Columns names
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_TITLE = "title";
@@ -39,8 +40,8 @@ public class SqlRunner extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_TASKS + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY," + COLUMN_TITLE + " TEXT,"
-                + COLUMN_DESCRIPTION + " TEXT"
-                + COLUMN_DATE + " TEXT"
+                + COLUMN_DESCRIPTION + " TEXT,"
+                + COLUMN_DATE + " TEXT,"
                 + COLUMN_CATEGORY + " TEXT"
                 + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
@@ -59,7 +60,7 @@ public class SqlRunner extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_TITLE, task.getTitle());
         contentValues.put(COLUMN_DESCRIPTION, task.getDescription());
-        contentValues.put(COLUMN_DATE, task.getDate().toString());
+        contentValues.put(COLUMN_DATE, task.getDate());
         contentValues.put(COLUMN_CATEGORY, task.getCategory().toString());
 
         long result = db.insert(TABLE_TASKS, null, contentValues);
@@ -71,7 +72,7 @@ public class SqlRunner extends SQLiteOpenHelper {
         }
     }
 
-    public List<Task> getAllShops() {
+    public List<Task> getAllTasks() {
         List<Task> tasks = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT * FROM " + TABLE_TASKS;
@@ -92,6 +93,11 @@ public class SqlRunner extends SQLiteOpenHelper {
         }
         // return contact list
         return tasks;
+    }
+
+    public void execQuery(String query){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(query);
     }
 
 

@@ -12,6 +12,23 @@ public class Task {
     private String date;
     private Category category;
 
+    public Task(){
+        
+    }
+
+    public Task(String title, String description, String date, Category category) {
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        this.category = category;
+    }
+
+    public Task(String title, String description, String date) {
+        this.title = title;
+        this.description = description;
+        this.date = date;
+    }
+
     public int getId() {
         return id;
     }
