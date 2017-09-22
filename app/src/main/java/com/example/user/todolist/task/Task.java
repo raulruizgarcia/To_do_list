@@ -2,8 +2,6 @@ package com.example.user.todolist.task;
 
 import com.example.user.todolist.category.Category;
 
-import java.util.Date;
-
 //import java.util.*;
 
 public class Task {
@@ -11,7 +9,7 @@ public class Task {
     private int id;
     private String title;
     private String description;
-    private Date date;
+    private String date;
     private Category category;
 
     public int getId() {
@@ -26,7 +24,7 @@ public class Task {
         return description;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -46,7 +44,7 @@ public class Task {
         this.description = description;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
