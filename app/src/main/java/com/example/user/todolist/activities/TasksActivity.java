@@ -29,7 +29,11 @@ public class TasksActivity extends AppCompatActivity {
         sqlRunner = new SqlRunner(this);
 
         // get tasks from the DB
-        tasks = sqlRunner.getAllTasks();
+        try {
+            tasks = sqlRunner.getAllTasks();
+        } catch (Exception e){
+            tasks = new ArrayList<>();
+        }
 
 
         // display tasks in the list
@@ -46,5 +50,12 @@ public class TasksActivity extends AppCompatActivity {
     public void onNewTaskFloatingButtonPressed(View floatingButton){
         Intent intent = new Intent(this, EditTaskActivity.class);
         startActivity(intent);
+    }
+
+    public void onDeleteAllButtonPressed(View floatingButton){
+        sqlRunner.deleteAllTasks();
+        tasks = new ArrayList<>();
+        TaskAdapter taskAdapter = new TaskAdapter(this, tasks);
+        listView.setAdapter(taskAdapter);
     }
 }

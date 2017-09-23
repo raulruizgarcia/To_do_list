@@ -6,6 +6,29 @@
     android:layout_height="match_parent"
     tools:context="com.example.user.todolist.activities.TasksActivity">
 
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/deleteAllFloatingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="32dp"
+        android:clickable="true"
+        android:onClick="onDeleteAllButtonPressed"
+        app:backgroundTint="@color/colorAccent"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/addFloatingButton"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addFloatingButton"
         android:layout_width="wrap_content"
@@ -15,17 +38,9 @@
         android:clickable="true"
         android:onClick="onNewTaskFloatingButtonPressed"
         app:backgroundTint="@color/colorPrimary"
-        app:fabSize="mini"
+        app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:rippleColor="@android:color/background_light"
         app:srcCompat="@android:drawable/ic_input_add" />
-
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
