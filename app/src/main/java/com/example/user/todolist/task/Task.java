@@ -90,7 +90,7 @@ public class Task {
         long diff = 0;
         try {
             Date taskDate = myFormat.parse(date);
-            diff = (long) currentDate.getTime() - taskDate.getTime();
+            diff = (long) taskDate.getTime() - currentDate.getTime();
             System.out.println ("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
         } catch (ParseException e) {
             e.printStackTrace();
