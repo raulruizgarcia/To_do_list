@@ -22,10 +22,17 @@ public class TasksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks);
 
-        // initialise items and get ahold of views
+        // initialise items and get a hold of views
+
 
         listView = (ListView) findViewById(R.id.listView);
         sqlRunner = new SqlRunner(this);
+
+        sqlRunner.deleteAllTasks();
+
+        sqlRunner.save(new Task("First task", " ", "07-10-2017", Category.ADULT_STUFF));
+        sqlRunner.save(new Task("Second task", " ", "07-11-2017", Category.ADULT_STUFF));
+        sqlRunner.save(new Task("Third task", " ", "07-12-2017", Category.ADULT_STUFF));
         tasks = sqlRunner.getAllTasks();
 
         TaskAdapter taskAdapter = new TaskAdapter(this, tasks);
