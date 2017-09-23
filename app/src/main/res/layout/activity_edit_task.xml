@@ -11,11 +11,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="0dp"
         android:onClick="onCalendarButtonPressed"
         app:layout_constraintLeft_toRightOf="@+id/taskDateEditText"
-        app:layout_constraintTop_toBottomOf="@+id/taskDateLabel"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+        app:srcCompat="@android:drawable/ic_menu_my_calendar"
+        app:layout_constraintBottom_toBottomOf="@+id/taskDateEditText"
+        android:layout_marginStart="16dp" />
 
     <TextView
         android:id="@+id/tastkTitleLabel"
@@ -35,11 +35,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="0dp"
         android:ems="10"
         android:hint="@string/task_title_hint"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tastkTitleLabel" />
 
@@ -48,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="23dp"
         android:text="@string/task_description_label"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -61,7 +59,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="0dp"
         android:ems="10"
         android:hint="@string/task_description_hint"
         android:inputType="textMultiLine"
@@ -73,22 +70,57 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="23dp"
         android:text="@string/task_date_label"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskDescriptionEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/taskDescriptionEditText"
+        android:layout_marginStart="24dp" />
 
     <EditText
         android:id="@+id/taskDateEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="0dp"
         android:ems="10"
         android:hint="@string/task_date_hint"
         android:inputType="date"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskDateLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/taskDateLabel"
+        android:layout_marginStart="24dp" />
+
+    <TextView
+        android:id="@+id/TaskCategoryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="26dp"
+        android:text="@string/task_category_label"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskDateEditText"
+        android:layout_marginStart="24dp" />
+
+    <Spinner
+        android:id="@+id/task_category_dropdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TaskCategoryLabel"
+        android:layout_marginStart="24dp" />
+
+    <Button
+        android:id="@+id/saveNoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="32dp"
+        android:onClick="onSaveNoteButtonPressed"
+        android:text="@string/save_note_button_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_category_dropdown"
+        android:layout_marginStart="24dp" />
 
 </android.support.constraint.ConstraintLayout>

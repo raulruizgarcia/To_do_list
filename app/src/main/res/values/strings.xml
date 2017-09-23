@@ -8,4 +8,6 @@
     <string name="task_description_hint">Enter a description for your task (optional)</string>
     <string name="task_date_label">Task due date</string>
     <string name="task_date_hint">dd-mm-yyyy</string>
+    <string name="task_category_label">Select a category</string>
+    <string name="save_note_button_text">Save note</string>
 </resources>

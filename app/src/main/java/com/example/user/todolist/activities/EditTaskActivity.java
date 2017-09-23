@@ -7,15 +7,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.user.todolist.R;
+import com.example.user.todolist.category.Category;
+import com.example.user.todolist.task.Task;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class EditTaskActivity extends AppCompatActivity {
@@ -25,6 +32,10 @@ public class EditTaskActivity extends AppCompatActivity {
     EditText dateEditText;
     ImageButton calendarButton;
     private DatePickerDialog.OnDateSetListener myDateSetListener;
+    Spinner category_spinner;
+    ArrayAdapter<String> categoryAdapter;
+    ArrayList<String> categories;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +48,35 @@ public class EditTaskActivity extends AppCompatActivity {
         dateEditText = (EditText) findViewById(R.id.taskDateEditText);
         calendarButton = (ImageButton) findViewById(R.id.calendarButton);
         myDateSetListener = getDatePicker();
+        category_spinner = (Spinner) findViewById(R.id.task_category_dropdown);
 
+        // populate categories spinner
+        categories = new ArrayList<>();
+        for (Category category: Category.values()){
+            categories.add(category.toString());
+        }
+
+        categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,categories);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        category_spinner.setAdapter(categoryAdapter);
     }
+
+    public void onSaveNoteButtonPressed(View button){
+        String title = titleTextEdit.getText().toString();
+        String description = descriptionTextEdit.getText().toString();
+        String date = dateEditText.getText().toString();
+        String category = category_spinner.getSelectedItem().toString();
+        Log.d("Title", title);
+        Log.d("Description", description);
+        Log.d("Date", date);
+        Log.d("Category", category);
+        Task task = new Task(title, description,date,Category.valueOf(category));
+        System.out.println(task);
+    }
+
+
+
     // returns OnDateSetListener
     public DatePickerDialog.OnDateSetListener getDatePicker(){
         return new DatePickerDialog.OnDateSetListener() {
@@ -50,6 +88,7 @@ public class EditTaskActivity extends AppCompatActivity {
             }
         };
     }
+
 
     public void onCalendarButtonPressed(View view){
         Calendar calendar = Calendar.getInstance();
