@@ -2,6 +2,12 @@ package com.example.user.todolist.task;
 
 import com.example.user.todolist.category.Category;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 //import java.util.*;
 
 public class Task {
@@ -75,5 +81,21 @@ public class Task {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public long daysLeft(){
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+        long diff = 0;
+        try {
+            Date taskDate = myFormat.parse(date);
+            diff = (long) currentDate.getTime() - taskDate.getTime();
+            System.out.println ("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
     }
 }
