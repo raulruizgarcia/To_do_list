@@ -1,7 +1,9 @@
 package com.example.user.todolist.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 
 import com.example.user.todolist.R;
@@ -23,20 +25,20 @@ public class TasksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tasks);
 
         // initialise items and get a hold of views
-
-
         listView = (ListView) findViewById(R.id.listView);
         sqlRunner = new SqlRunner(this);
 
-        sqlRunner.deleteAllTasks();
-
-        sqlRunner.save(new Task("First task", " ", "07-10-2017", Category.ADULT_STUFF));
-        sqlRunner.save(new Task("Second task", " ", "07-11-2017", Category.ADULT_STUFF));
-        sqlRunner.save(new Task("Third task", " ", "07-12-2017", Category.ADULT_STUFF));
+        // get tasks from the DB
         tasks = sqlRunner.getAllTasks();
 
-        TaskAdapter taskAdapter = new TaskAdapter(this, tasks);
 
+        // display tasks in the list
+        TaskAdapter taskAdapter = new TaskAdapter(this, tasks);
         listView.setAdapter(taskAdapter);
+    }
+
+    public void onNewTaskFloatingButtonPressed(View floatingButton){
+        Intent intent = new Intent(this, EditTaskActivity.class);
+        startActivity(intent);
     }
 }

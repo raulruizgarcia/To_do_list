@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">To-do list</string>
     <string name="title_activity_tasks">TasksActivity</string>
+    <string name="edit_activity_label">Edit or add a new task</string>
+    <string name="task_title_label">Task title</string>
+    <string name="task_title_hint">Enter a title for your new task</string>
+    <string name="task_description_label">Task description</string>
+    <string name="task_description_hint">Enter a description for your task (optional)</string>
 </resources>
