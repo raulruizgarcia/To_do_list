@@ -31,41 +31,39 @@ public class EditTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
 
-        // get ahold of views
+        // get a hold of views
         titleTextEdit = (EditText) findViewById(R.id.taskTitleEditText);
         descriptionTextEdit = (EditText) findViewById(R.id.taskDescriptionEditText);
         dateEditText = (EditText) findViewById(R.id.taskDateEditText);
         calendarButton = (ImageButton) findViewById(R.id.calendarButton);
+        myDateSetListener = getDatePicker();
 
-        // Calendar and datePicker Set up
-        calendarButton.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog dialog = new DatePickerDialog(
-                        EditTaskActivity.this,
-                        android.R.style.Theme_Holo_Light,
-                        myDateSetListener,
-                        year, month, day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
-        myDateSetListener = new DatePickerDialog.OnDateSetListener() {
+    }
+    // returns OnDateSetListener
+    public DatePickerDialog.OnDateSetListener getDatePicker(){
+        return new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month += 1;
                 String date = day + "-" + month + "-" + year;
                 dateEditText.setText(date);
-
             }
         };
+    }
 
+    public void onCalendarButtonPressed(View view){
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dialog = new DatePickerDialog(
+                EditTaskActivity.this,
+                android.R.style.Theme_Holo_Light,
+                myDateSetListener,
+                year, month, day);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 
 
