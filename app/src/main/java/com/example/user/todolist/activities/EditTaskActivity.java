@@ -1,6 +1,7 @@
 package com.example.user.todolist.activities;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.user.todolist.R;
 import com.example.user.todolist.category.Category;
+import com.example.user.todolist.sqlRunner.SqlRunner;
 import com.example.user.todolist.task.Task;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ import java.util.Calendar;
 
 public class EditTaskActivity extends AppCompatActivity {
 
+    SqlRunner sqlRunner;
     EditText titleTextEdit;
     EditText descriptionTextEdit;
     EditText dateEditText;
@@ -50,7 +53,13 @@ public class EditTaskActivity extends AppCompatActivity {
         myDateSetListener = getDatePicker();
         category_spinner = (Spinner) findViewById(R.id.task_category_dropdown);
 
-        // populate categories spinner
+        sqlRunner = new SqlRunner(this);
+
+        populateCategorySpinner();
+
+    }
+
+    public void populateCategorySpinner(){
         categories = new ArrayList<>();
         for (Category category: Category.values()){
             categories.add(category.toString());
@@ -72,7 +81,10 @@ public class EditTaskActivity extends AppCompatActivity {
         Log.d("Date", date);
         Log.d("Category", category);
         Task task = new Task(title, description,date,Category.valueOf(category));
+        sqlRunner.save(task);
         System.out.println(task);
+        Intent intent = new Intent(this, TasksActivity.class);
+        startActivity(intent);
     }
 
 

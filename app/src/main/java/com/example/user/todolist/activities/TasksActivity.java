@@ -37,6 +37,12 @@ public class TasksActivity extends AppCompatActivity {
         listView.setAdapter(taskAdapter);
     }
 
+//    @Override
+//    public void onResume(){
+//        super.onResume();
+//
+//    }
+
     public void onNewTaskFloatingButtonPressed(View floatingButton){
         Intent intent = new Intent(this, EditTaskActivity.class);
         startActivity(intent);
