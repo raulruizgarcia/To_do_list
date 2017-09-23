@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context="com.example.user.todolist.activities.EditTaskActivity">
 
+    <ImageButton
+        android:id="@+id/calendarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="0dp"
+        android:onClick="onCalendarButtonPressed"
+        app:layout_constraintLeft_toRightOf="@+id/taskDateEditText"
+        app:layout_constraintTop_toBottomOf="@+id/taskDateLabel"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
     <TextView
         android:id="@+id/tastkTitleLabel"
         android:layout_width="wrap_content"
@@ -24,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="0dp"
         android:ems="10"
         android:hint="@string/task_title_hint"
         android:inputType="textPersonName"
@@ -50,10 +61,34 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="0dp"
         android:ems="10"
         android:hint="@string/task_description_hint"
         android:inputType="textMultiLine"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/taskDescriptionLabel" />
+
+    <TextView
+        android:id="@+id/taskDateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/task_date_label"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskDescriptionEditText" />
+
+    <EditText
+        android:id="@+id/taskDateEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:hint="@string/task_date_hint"
+        android:inputType="date"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskDateLabel" />
+
 </android.support.constraint.ConstraintLayout>

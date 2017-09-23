@@ -6,4 +6,6 @@
     <string name="task_title_hint">Enter a title for your new task</string>
     <string name="task_description_label">Task description</string>
     <string name="task_description_hint">Enter a description for your task (optional)</string>
+    <string name="task_date_label">Task due date</string>
+    <string name="task_date_hint">dd-mm-yyyy</string>
 </resources>
