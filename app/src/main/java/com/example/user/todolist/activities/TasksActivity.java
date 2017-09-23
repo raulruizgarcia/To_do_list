@@ -6,6 +6,7 @@ import android.widget.ListView;
 
 import com.example.user.todolist.R;
 import com.example.user.todolist.category.Category;
+import com.example.user.todolist.sqlRunner.SqlRunner;
 import com.example.user.todolist.task.Task;
 
 import java.util.ArrayList;
@@ -14,21 +15,18 @@ public class TasksActivity extends AppCompatActivity {
 
     ArrayList<Task> tasks;
     ListView listView;
+    SqlRunner sqlRunner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks);
 
+        // initialise items and get ahold of views
+
         listView = (ListView) findViewById(R.id.listView);
-
-        // Test seed
-
-        tasks = new ArrayList<>();
-        tasks.add(new Task("A title", "Description", "17-10-2017", Category.ADULT_STUFF));
-        tasks.add(new Task("A title", "Description", "24-10-2017", Category.ADULT_STUFF));
-        tasks.add(new Task("A title", "Description", "5-10-2017", Category.ADULT_STUFF));
-        tasks.add(new Task("A title", "Description", "30-10-2017", Category.ADULT_STUFF));
+        sqlRunner = new SqlRunner(this);
+        tasks = sqlRunner.getAllTasks();
 
         TaskAdapter taskAdapter = new TaskAdapter(this, tasks);
 

@@ -19,6 +19,8 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         super(context, 0, tasks);
     }
 
+
+
     public View getView(int position, View taskItem, ViewGroup parent){
         if (taskItem == null){
             taskItem = LayoutInflater.from(getContext()).inflate(R.layout.activity_list_view, parent, false);
