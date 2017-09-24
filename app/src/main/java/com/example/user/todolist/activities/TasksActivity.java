@@ -54,17 +54,14 @@ public class TasksActivity extends AppCompatActivity {
                 (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int itemSelected = adapterContextMenuInfo.position;
         switch (item.getItemId()){
-            case R.id.item1:
-                Toast.makeText(this, "item clicked" + itemSelected, Toast.LENGTH_LONG).show();
+            case R.id.edit_menu_item:
+                Toast.makeText(this, "TODO: Move to edit screen for item " + itemSelected, Toast.LENGTH_LONG).show();
                 return true;
-            case R.id.item2:
-                Toast.makeText(this, "item clicked" + itemSelected, Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.item3:
-                Toast.makeText(this, "item clicked" + itemSelected, Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.item4:
-                Toast.makeText(this, "item clicked" + itemSelected, Toast.LENGTH_LONG).show();
+            case R.id.delete_menu_item:
+                Toast.makeText(this, "Deleting item: " + itemSelected, Toast.LENGTH_LONG).show();
+                Task taskToDelete = tasks.get(itemSelected);
+                sqlRunner.deleteTask(taskToDelete);
+                displayTasks();
                 return true;
         }
         return true;
