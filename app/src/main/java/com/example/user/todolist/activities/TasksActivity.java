@@ -49,22 +49,30 @@ public class TasksActivity extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-
         AdapterView.AdapterContextMenuInfo adapterContextMenuInfo =
                 (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int itemSelected = adapterContextMenuInfo.position;
+        Task taskToActUpon = tasks.get(itemSelected);
         switch (item.getItemId()){
             case R.id.edit_menu_item:
-                Toast.makeText(this, "TODO: Move to edit screen for item " + itemSelected, Toast.LENGTH_LONG).show();
+                editTask(taskToActUpon);
                 return true;
             case R.id.delete_menu_item:
                 Toast.makeText(this, "Deleting item: " + itemSelected, Toast.LENGTH_LONG).show();
-                Task taskToDelete = tasks.get(itemSelected);
-                sqlRunner.deleteTask(taskToDelete);
-                displayTasks();
+                deleteTask(taskToActUpon);
                 return true;
         }
         return true;
+    }
+
+    public void editTask(Task task){
+        Intent intent = new Intent(this, EditTaskActivity.class);
+        intent.putExtra("id", task.getId());
+        intent.putExtra("title", task.getTitle());
+        intent.putExtra("description", task.getDescription());
+        intent.putExtra("date", task.getDate());
+        intent.putExtra("category", task.getCategory().toString());
+        startActivity(intent);
     }
 
     public void displayTasks(){
@@ -76,6 +84,11 @@ public class TasksActivity extends AppCompatActivity {
         TaskAdapter taskAdapter = new TaskAdapter(this, tasks);
         listView.setAdapter(taskAdapter);
 
+    }
+
+    public void deleteTask(Task task) {
+        sqlRunner.deleteTask(task);
+        displayTasks();
     }
 
     public void onNewTaskFloatingButtonPressed(View floatingButton){

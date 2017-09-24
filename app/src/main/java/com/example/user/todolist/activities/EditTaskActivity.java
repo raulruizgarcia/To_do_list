@@ -57,6 +57,23 @@ public class EditTaskActivity extends AppCompatActivity {
 
         populateCategorySpinner();
 
+        if (bundleHasContents()){
+            populateFieldsWithExtras();
+        }
+
+    }
+
+    public void populateFieldsWithExtras(){
+        Intent intent = getIntent();
+        titleTextEdit.setText(intent.getStringExtra("title"));
+        descriptionTextEdit.setText(intent.getStringExtra("description"));
+        dateEditText.setText(intent.getStringExtra("date"));
+        int categoryPosition = Category.valueOf(intent.getStringExtra("category")).ordinal();
+        category_spinner.setSelection(categoryPosition);
+    }
+
+    public boolean bundleHasContents(){
+        return getIntent().hasExtra("id");
     }
 
     public void populateCategorySpinner(){
