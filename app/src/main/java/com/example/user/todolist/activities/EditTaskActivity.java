@@ -87,8 +87,6 @@ public class EditTaskActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
     // returns OnDateSetListener
     public DatePickerDialog.OnDateSetListener getDatePicker(){
         return new DatePickerDialog.OnDateSetListener() {
