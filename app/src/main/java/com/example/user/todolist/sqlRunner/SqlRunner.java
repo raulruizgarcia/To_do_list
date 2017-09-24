@@ -24,7 +24,7 @@ public class SqlRunner extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "taskdb";
     // Contacts table name
     private static final String TABLE_TASKS = "tasks_table";
-    // Shops Table Columns names
+    // Tasks Table Columns names
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_TITLE = "title";
     private static final String COLUMN_DESCRIPTION = "description";
@@ -108,11 +108,11 @@ public class SqlRunner extends SQLiteOpenHelper {
             cursor.moveToFirst();
         Task task = new Task(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getString(2), cursor.getString(3), Category.valueOf(cursor.getString(4)));
-        // return shop
+        // return task
         return task;
     }
 
-    public int updateShop(Task task) {
+    public int updateTask(Task task) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_TITLE, task.getTitle());
@@ -124,7 +124,7 @@ public class SqlRunner extends SQLiteOpenHelper {
                 new String[]{String.valueOf(task.getId())});
     }
 
-    // Deleting a shop
+
     public void deleteTask(Task task) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_TASKS, COLUMN_ID + " = ?",

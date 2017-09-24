@@ -9,5 +9,6 @@
     <string name="task_date_label">Task due date</string>
     <string name="task_date_hint">dd-mm-yyyy</string>
     <string name="task_category_label">Select a category</string>
-    <string name="save_note_button_text">Save note</string>
+    <string name="save_note_button_text">Save task</string>
+    <string name="update_button_text">Update task</string>
 </resources>

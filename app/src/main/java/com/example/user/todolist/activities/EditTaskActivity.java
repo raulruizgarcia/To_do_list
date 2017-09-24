@@ -38,6 +38,7 @@ public class EditTaskActivity extends AppCompatActivity {
     Spinner category_spinner;
     ArrayAdapter<String> categoryAdapter;
     ArrayList<String> categories;
+    int temporaryTaskId;
 
 
     @Override
@@ -65,6 +66,7 @@ public class EditTaskActivity extends AppCompatActivity {
 
     public void populateFieldsWithExtras(){
         Intent intent = getIntent();
+        temporaryTaskId = Integer.parseInt(intent.getStringExtra("id"));
         titleTextEdit.setText(intent.getStringExtra("title"));
         descriptionTextEdit.setText(intent.getStringExtra("description"));
         dateEditText.setText(intent.getStringExtra("date"));
@@ -104,7 +106,6 @@ public class EditTaskActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // returns OnDateSetListener
     public DatePickerDialog.OnDateSetListener getDatePicker(){
         return new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -115,6 +116,23 @@ public class EditTaskActivity extends AppCompatActivity {
             }
         };
     }
+
+    public void onUpdateNoteButtonPressed(View button){
+        Toast.makeText(this, "Update button pressed", Toast.LENGTH_SHORT).show();
+        Intent intent = getIntent();
+        int id = Integer.parseInt(intent.getStringExtra("id"));
+        String title = titleTextEdit.getText().toString();
+        String description = descriptionTextEdit.getText().toString();
+        String date = dateEditText.getText().toString();
+        Category category = Category.valueOf(category_spinner.getSelectedItem().toString());
+
+        Task taskToUpdate = new Task(id, title, description, date, category);
+        sqlRunner.updateTask(taskToUpdate);
+
+        Intent goBackToHomePage = new Intent(this, TasksActivity.class);
+        startActivity(goBackToHomePage);
+    }
+
 
 
     public void onCalendarButtonPressed(View view){

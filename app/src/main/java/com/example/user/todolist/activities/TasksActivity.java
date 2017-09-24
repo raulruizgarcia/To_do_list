@@ -67,7 +67,7 @@ public class TasksActivity extends AppCompatActivity {
 
     public void editTask(Task task){
         Intent intent = new Intent(this, EditTaskActivity.class);
-        intent.putExtra("id", task.getId());
+        intent.putExtra("id", String.valueOf(task.getId()));
         intent.putExtra("title", task.getTitle());
         intent.putExtra("description", task.getDescription());
         intent.putExtra("date", task.getDate());
