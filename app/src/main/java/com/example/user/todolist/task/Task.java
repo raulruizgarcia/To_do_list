@@ -92,7 +92,7 @@ public class Task implements Comparable<Task> {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + 1;
     }
 
     @Override

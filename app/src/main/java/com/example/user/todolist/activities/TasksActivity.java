@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,6 +46,12 @@ public class TasksActivity extends AppCompatActivity {
         registerForContextMenu(listView);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.filter_menu, menu);
+        return true;
+    }
 
     public void editTask(Task task){
         Intent intent = new Intent(this, EditTaskActivity.class);
