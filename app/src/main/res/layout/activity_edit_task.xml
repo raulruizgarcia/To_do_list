@@ -127,11 +127,11 @@
         android:id="@+id/updateNoteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
         android:onClick="onUpdateNoteButtonPressed"
         android:text="@string/update_button_text"
-        app:layout_constraintLeft_toRightOf="@+id/saveNoteButton"
-        app:layout_constraintTop_toBottomOf="@+id/task_category_dropdown" />
+        app:layout_constraintTop_toBottomOf="@+id/task_category_dropdown"
+        android:layout_marginLeft="24dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

@@ -102,4 +102,9 @@ public class TasksActivity extends AppCompatActivity {
         TaskAdapter taskAdapter = new TaskAdapter(this, tasks);
         listView.setAdapter(taskAdapter);
     }
+
+    public void onMenuItemClicked(View view){
+        Task task = (Task)view.getTag();
+        editTask(task);
+    }
 }

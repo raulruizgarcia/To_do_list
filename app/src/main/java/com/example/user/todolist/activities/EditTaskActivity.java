@@ -39,6 +39,8 @@ public class EditTaskActivity extends AppCompatActivity {
     ArrayAdapter<String> categoryAdapter;
     ArrayList<String> categories;
     int temporaryTaskId;
+    Button saveButton;
+    Button updateButton;
 
 
     @Override
@@ -47,6 +49,8 @@ public class EditTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_task);
 
         // get a hold of views
+        updateButton = (Button) findViewById(R.id.updateNoteButton);
+        saveButton = (Button) findViewById(R.id.saveNoteButton);
         titleTextEdit = (EditText) findViewById(R.id.taskTitleEditText);
         descriptionTextEdit = (EditText) findViewById(R.id.taskDescriptionEditText);
         dateEditText = (EditText) findViewById(R.id.taskDateEditText);
@@ -60,6 +64,9 @@ public class EditTaskActivity extends AppCompatActivity {
 
         if (bundleHasContents()){
             populateFieldsWithExtras();
+            saveButton.setVisibility(View.INVISIBLE);
+        } else {
+            updateButton.setVisibility(View.INVISIBLE);
         }
 
     }
