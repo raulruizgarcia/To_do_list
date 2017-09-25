@@ -2,12 +2,16 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <item
-        android:id="@+id/first"
-        android:title="first item"
-        app:actionLayout="@layout/switch_item" />
+        android:id="@+id/filter_adult_stuff"
+        android:title="@string/filter_adult_stuff_text" />
+
     <item
-        android:id="@+id/second"
-        android:title="second item"
-        app:actionLayout="@layout/switch_item" />
+        android:id="@+id/filter_coding"
+        android:title="@string/filter_coding_text" />
+
+    <item
+        android:id="@+id/filter_movies"
+        android:title="@string/filter_movies_text" />
 </menu>

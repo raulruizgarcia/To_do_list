@@ -13,4 +13,7 @@
     <string name="update_button_text">Update task</string>
     <string name="days_left_label">Days left</string>
     <string name="tastk_title_label">Tasks</string>
+    <string name="filter_adult_stuff_text">Adult stuff</string>
+    <string name="filter_coding_text">Coding</string>
+    <string name="filter_movies_text">Movies</string>
 </resources>
