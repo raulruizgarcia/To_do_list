@@ -1,7 +1,9 @@
 package com.example.user.todolist.activities;
 
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,9 +45,6 @@ public class TasksActivity extends AppCompatActivity {
         deleteAllButton = (FloatingActionButton) findViewById(R.id.deleteAllFloatingButton);
         deleteAllButton.setVisibility(View.INVISIBLE);
         displayTasks();
-
-        // Register contextual menu
-        registerForContextMenu(listView);
     }
 
     public boolean filterContentByCategory(Category category){
