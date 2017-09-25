@@ -1,6 +1,7 @@
 package com.example.user.todolist.activities;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -23,6 +24,7 @@ public class TasksActivity extends AppCompatActivity {
     ArrayList<Task> tasks;
     ListView listView;
     SqlRunner sqlRunner;
+    FloatingActionButton deleteAllButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,10 @@ public class TasksActivity extends AppCompatActivity {
         // initialise items and get a hold of views
         listView = (ListView) findViewById(R.id.listView);
         sqlRunner = new SqlRunner(this);
+
+        // Set back to visible after troubleshooting
+        deleteAllButton = (FloatingActionButton) findViewById(R.id.deleteAllFloatingButton);
+        deleteAllButton.setVisibility(View.INVISIBLE);
         displayTasks();
 
         // Register contextual menu
@@ -106,5 +112,9 @@ public class TasksActivity extends AppCompatActivity {
     public void onMenuItemClicked(View view){
         Task task = (Task)view.getTag();
         editTask(task);
+    }
+
+    public void onTaskPressed(View view){
+        Toast.makeText(this, "task clicked", Toast.LENGTH_SHORT).show();
     }
 }
