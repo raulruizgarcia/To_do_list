@@ -102,13 +102,8 @@ public class EditTaskActivity extends AppCompatActivity {
         String description = descriptionTextEdit.getText().toString();
         String date = dateEditText.getText().toString();
         String category = category_spinner.getSelectedItem().toString();
-        Log.d("Title", title);
-        Log.d("Description", description);
-        Log.d("Date", date);
-        Log.d("Category", category);
         Task task = new Task(title, description,date,Category.valueOf(category));
         sqlRunner.save(task);
-        System.out.println(task);
         Intent intent = new Intent(this, TasksActivity.class);
         startActivity(intent);
     }
@@ -122,6 +117,21 @@ public class EditTaskActivity extends AppCompatActivity {
                 dateEditText.setText(date);
             }
         };
+    }
+
+    public void onCalendarButtonPressed(View view){
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dialog = new DatePickerDialog(
+                EditTaskActivity.this,
+                android.R.style.Theme_Holo_Light,
+                myDateSetListener,
+                year, month, day);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 
     public void onUpdateNoteButtonPressed(View button){
@@ -138,23 +148,6 @@ public class EditTaskActivity extends AppCompatActivity {
 
         Intent goBackToHomePage = new Intent(this, TasksActivity.class);
         startActivity(goBackToHomePage);
-    }
-
-
-
-    public void onCalendarButtonPressed(View view){
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog dialog = new DatePickerDialog(
-                EditTaskActivity.this,
-                android.R.style.Theme_Holo_Light,
-                myDateSetListener,
-                year, month, day);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.show();
     }
 
 

@@ -42,34 +42,8 @@ public class TasksActivity extends AppCompatActivity {
 
         // Register contextual menu
         registerForContextMenu(listView);
-
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_item, menu);
-
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo adapterContextMenuInfo =
-                (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int itemSelected = adapterContextMenuInfo.position;
-        Task taskToActUpon = tasks.get(itemSelected);
-        switch (item.getItemId()){
-            case R.id.edit_menu_item:
-                editTask(taskToActUpon);
-                return true;
-            case R.id.delete_menu_item:
-                Toast.makeText(this, "Deleting item: " + itemSelected, Toast.LENGTH_LONG).show();
-                deleteTask(taskToActUpon);
-                return true;
-        }
-        return true;
-    }
 
     public void editTask(Task task){
         Intent intent = new Intent(this, EditTaskActivity.class);
@@ -109,17 +83,47 @@ public class TasksActivity extends AppCompatActivity {
         listView.setAdapter(taskAdapter);
     }
 
-    public void onMenuItemClicked(View view){
-        Task task = (Task)view.getTag();
+    public void onTaskPressed(View view){
+        View parentRow = (View) view.getParent();
+        Task task = (Task)parentRow.getTag();
         editTask(task);
     }
 
-    public void onTaskPressed(View view){
-        Toast.makeText(this, "task presed", Toast.LENGTH_SHORT).show();
-    }
-
-    public void onDeleteItemButtonPressed(View button){
-        Toast.makeText(this, "delete button pressed", Toast.LENGTH_SHORT).show();
+    public void onDeleteItemButtonPressed(View view){
+        View parentRow = (View) view.getParent();
+        Task task = (Task) parentRow.getTag();
+        deleteTask(task);
 
     }
+
+    // All the commented out code below was responsible for the contextual menu
+
+
+
+//    @Override
+//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+//        super.onCreateContextMenu(menu, v, menuInfo);
+//        MenuInflater menuInflater = getMenuInflater();
+//        menuInflater.inflate(R.menu.menu_item, menu);
+//
+//    }
+//
+//    @Override
+//    public boolean onContextItemSelected(MenuItem item) {
+//        AdapterView.AdapterContextMenuInfo adapterContextMenuInfo =
+//                (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+//        int itemSelected = adapterContextMenuInfo.position;
+//        Task taskToActUpon = tasks.get(itemSelected);
+//        switch (item.getItemId()){
+//            case R.id.edit_menu_item:
+//                editTask(taskToActUpon);
+//                return true;
+//            case R.id.delete_menu_item:
+//                Toast.makeText(this, "Deleting item: " + itemSelected, Toast.LENGTH_LONG).show();
+//                deleteTask(taskToActUpon);
+//                return true;
+//        }
+//        return true;
+//    }
+
 }

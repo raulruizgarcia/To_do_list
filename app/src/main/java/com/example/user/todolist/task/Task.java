@@ -29,11 +29,6 @@ public class Task {
         this.category = category;
     }
 
-    public Task(String title, String description, String date) {
-        this.title = title;
-        this.description = description;
-        this.date = date;
-    }
 
     public Task(int id, String title, String description, String date, Category category){
         this.id = id;
