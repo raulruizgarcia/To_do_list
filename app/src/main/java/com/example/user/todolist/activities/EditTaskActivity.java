@@ -97,15 +97,28 @@ public class EditTaskActivity extends AppCompatActivity {
         category_spinner.setAdapter(categoryAdapter);
     }
 
+    public boolean isTitleFieldValid(){
+        if (titleTextEdit.getText().toString().equals("")){
+            Toast.makeText(this, "Title field cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
     public void onSaveNoteButtonPressed(View button){
-        String title = titleTextEdit.getText().toString();
-        String description = descriptionTextEdit.getText().toString();
-        String date = dateEditText.getText().toString();
-        String category = category_spinner.getSelectedItem().toString();
-        Task task = new Task(title, description,date,Category.valueOf(category));
-        sqlRunner.save(task);
-        Intent intent = new Intent(this, TasksActivity.class);
-        startActivity(intent);
+        if (isTitleFieldValid()) {
+            Log.d("Title editText state:", titleTextEdit.getText().toString());
+            String title = titleTextEdit.getText().toString();
+            String description = descriptionTextEdit.getText().toString();
+            String date = dateEditText.getText().toString();
+            String category = category_spinner.getSelectedItem().toString();
+            Task task = new Task(title, description, date, Category.valueOf(category));
+            sqlRunner.save(task);
+            Intent intent = new Intent(this, TasksActivity.class);
+            startActivity(intent);
+        }
     }
 
     public DatePickerDialog.OnDateSetListener getDatePicker(){
@@ -135,7 +148,7 @@ public class EditTaskActivity extends AppCompatActivity {
     }
 
     public void onUpdateNoteButtonPressed(View button){
-        Toast.makeText(this, "Update button pressed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Task updated", Toast.LENGTH_SHORT).show();
         Intent intent = getIntent();
         int id = Integer.parseInt(intent.getStringExtra("id"));
         String title = titleTextEdit.getText().toString();

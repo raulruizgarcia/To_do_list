@@ -1,5 +1,7 @@
 package com.example.user.todolist.task;
 
+import android.support.annotation.NonNull;
+
 import com.example.user.todolist.category.Category;
 
 import java.text.ParseException;
@@ -10,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 //import java.util.*;
 
-public class Task {
+public class Task implements Comparable<Task> {
 
     private int id;
     private String title;
@@ -18,7 +20,7 @@ public class Task {
     private String date;
     private Category category;
 
-    public Task(){
+    public Task() {
 
     }
 
@@ -30,7 +32,7 @@ public class Task {
     }
 
 
-    public Task(int id, String title, String description, String date, Category category){
+    public Task(int id, String title, String description, String date, Category category) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -78,7 +80,7 @@ public class Task {
         this.category = category;
     }
 
-    public long daysLeft(){
+    public long daysLeft() {
         SimpleDateFormat myFormat = new SimpleDateFormat("dd-MM-yyyy");
         Calendar calendar = Calendar.getInstance();
         Date currentDate = calendar.getTime();
@@ -86,11 +88,26 @@ public class Task {
         try {
             Date taskDate = myFormat.parse(date);
             diff = (long) taskDate.getTime() - currentDate.getTime();
-            System.out.println ("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+            System.out.println("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-
     }
+
+    @Override
+    public int compareTo(Task otherTask) {
+        int myTime = (int) this.daysLeft();
+        int otherTaskTime = (int) otherTask.daysLeft();
+        int difference = myTime - otherTaskTime;
+        if (difference == 0) {
+            return 0;
+        } else if (difference > 0){
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+
 }

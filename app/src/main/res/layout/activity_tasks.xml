@@ -45,6 +45,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/days_left_label"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,11 +53,12 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
         android:layout_marginTop="8dp"
         android:text="@string/tastk_title_label"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="80dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/listView"

@@ -18,6 +18,7 @@ import com.example.user.todolist.sqlRunner.SqlRunner;
 import com.example.user.todolist.task.Task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TasksActivity extends AppCompatActivity {
 
@@ -58,6 +59,7 @@ public class TasksActivity extends AppCompatActivity {
     public void displayTasks(){
         try {
             tasks = sqlRunner.getAllTasks();
+            Collections.sort(tasks);
         } catch (Exception e){
             tasks = new ArrayList<>();
         }
