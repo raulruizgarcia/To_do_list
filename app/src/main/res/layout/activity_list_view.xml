@@ -26,4 +26,15 @@
         app:layout_constraintLeft_toRightOf="@+id/daysLeftListView"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/deleteImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="8dp"
+        android:onClick="onDeleteItemButtonPressed"
+        app:layout_constraintLeft_toRightOf="@+id/titleListView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
+
 </android.support.constraint.ConstraintLayout>

@@ -115,6 +115,11 @@ public class TasksActivity extends AppCompatActivity {
     }
 
     public void onTaskPressed(View view){
-        Toast.makeText(this, "task clicked", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "task presed", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onDeleteItemButtonPressed(View button){
+        Toast.makeText(this, "delete button pressed", Toast.LENGTH_SHORT).show();
+
     }
 }
