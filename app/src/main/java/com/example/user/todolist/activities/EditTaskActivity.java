@@ -177,7 +177,11 @@ public class EditTaskActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    protected void exitByBackKey() {
+    protected boolean exitByBackKey() {
+        if (titleTextEdit.getText().toString().equals("")){
+            finish();
+            return true;
+        }
         AlertDialog alertbox = new AlertDialog.Builder(this)
                 .setMessage("Do you want to discard the current task?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -191,6 +195,7 @@ public class EditTaskActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+        return true;
     }
 
     @Override
@@ -203,6 +208,5 @@ public class EditTaskActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 }
