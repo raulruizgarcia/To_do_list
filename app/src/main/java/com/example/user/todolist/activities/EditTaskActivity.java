@@ -64,9 +64,11 @@ public class EditTaskActivity extends AppCompatActivity {
 
         if (bundleHasContents()){
             populateFieldsWithExtras();
+            setTitle("Edit task");
             saveButton.setVisibility(View.INVISIBLE);
         } else {
             updateButton.setVisibility(View.INVISIBLE);
+            setTitle("Create a new task");
         }
 
     }
