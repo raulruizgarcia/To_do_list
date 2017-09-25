@@ -11,4 +11,6 @@
     <string name="task_category_label">Select a category</string>
     <string name="save_note_button_text">Save task</string>
     <string name="update_button_text">Update task</string>
+    <string name="days_left_label">Days left</string>
+    <string name="tastk_title_label">Tasks</string>
 </resources>
