@@ -4,31 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/notepad_background"
     tools:context="com.example.user.todolist.activities.EditTaskActivity">
 
     <ImageButton
         android:id="@+id/calendarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
         android:layout_marginLeft="16dp"
-        android:onClick="onCalendarButtonPressed"
-        app:layout_constraintLeft_toRightOf="@+id/taskDateEditText"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar"
-        app:layout_constraintBottom_toBottomOf="@+id/taskDateEditText"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="1dp" />
+        android:onClick="onCalendarButtonPressed"
+        app:layout_constraintBottom_toBottomOf="@+id/taskDateEditText"
+        app:layout_constraintLeft_toRightOf="@+id/taskDateEditText"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
     <TextView
         android:id="@+id/tastkTitleLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:text="@string/task_title_label"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="24dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/taskTitleEditText"
@@ -47,12 +48,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="23dp"
         android:text="@string/task_description_label"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskTitleEditText"
-        android:layout_marginStart="24dp" />
+        app:layout_constraintTop_toBottomOf="@+id/taskTitleEditText" />
 
     <EditText
         android:id="@+id/taskDescriptionEditText"
@@ -71,12 +72,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="23dp"
         android:text="@string/task_date_label"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskDescriptionEditText"
-        android:layout_marginStart="24dp" />
+        app:layout_constraintTop_toBottomOf="@+id/taskDescriptionEditText" />
 
     <EditText
         android:id="@+id/taskDateEditText"
@@ -97,45 +98,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="26dp"
         android:text="@string/task_category_label"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskDateEditText"
-        android:layout_marginStart="24dp" />
+        app:layout_constraintTop_toBottomOf="@+id/taskDateEditText" />
 
     <Spinner
         android:id="@+id/task_category_dropdown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TaskCategoryLabel"
-        android:layout_marginStart="24dp" />
+        app:layout_constraintTop_toBottomOf="@+id/TaskCategoryLabel" />
 
     <Button
         android:id="@+id/saveNoteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:onClick="onSaveNoteButtonPressed"
         android:text="@string/save_note_button_text"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_category_dropdown"
-        android:layout_marginStart="24dp" />
+        app:layout_constraintTop_toBottomOf="@+id/task_category_dropdown" />
 
     <Button
         android:id="@+id/updateNoteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:onClick="onUpdateNoteButtonPressed"
         android:text="@string/update_button_text"
-        app:layout_constraintTop_toBottomOf="@+id/task_category_dropdown"
-        android:layout_marginLeft="24dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="24dp" />
+        app:layout_constraintTop_toBottomOf="@+id/task_category_dropdown" />
 
 </android.support.constraint.ConstraintLayout>

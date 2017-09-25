@@ -16,4 +16,10 @@
     <string name="filter_adult_stuff_text">Adult stuff</string>
     <string name="filter_coding_text">Coding</string>
     <string name="filter_movies_text">Movies</string>
+    <string name="filter_food">Food</string>
+    <string name="filter_books">Books</string>
+    <string name="filter_games">Games</string>
+    <string name="fiter_gigs">Gigs</string>
+    <string name="filter_music">Music</string>
+    <string name="filter_fun_stuff">Fun Stuff</string>
 </resources>

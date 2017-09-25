@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +19,7 @@ import com.example.user.todolist.category.Category;
 import com.example.user.todolist.sqlRunner.SqlRunner;
 import com.example.user.todolist.task.Task;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -45,6 +47,54 @@ public class TasksActivity extends AppCompatActivity {
         // Register contextual menu
         registerForContextMenu(listView);
     }
+
+    public boolean filterContentByCategory(Category category){
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task: tasks){
+            if (task.getCategory() == category){
+                result.add(task);
+            }
+        }
+        TaskAdapter taskAdapter = new TaskAdapter(this, result);
+        listView.setAdapter(taskAdapter);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int selectedItemId = item.getItemId();
+        switch (selectedItemId) {
+            case R.id.filter_adult_stuff:
+                filterContentByCategory(Category.ADULT_STUFF);
+                break;
+            case R.id.filter_coding:
+                filterContentByCategory(Category.CODING);
+                break;
+            case R.id.filter_food:
+                filterContentByCategory(Category.FOOD);
+                break;
+            case R.id.filter_movies:
+                filterContentByCategory(Category.MOVIES);
+                break;
+            case R.id.filter_books:
+                filterContentByCategory(Category.BOOKS);
+                break;
+            case R.id.filter_games:
+                filterContentByCategory(Category.GAMES);
+                break;
+            case R.id.filter_gigs:
+                filterContentByCategory(Category.GIGS);
+                break;
+            case R.id.filter_music:
+                filterContentByCategory(Category.MUSIC);
+                break;
+            case R.id.filter_fun_stuff:
+                filterContentByCategory(Category.FUN_STUFF);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
