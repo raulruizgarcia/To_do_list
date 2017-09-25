@@ -91,10 +91,21 @@ public class EditTaskActivity extends AppCompatActivity {
         return getIntent().hasExtra("id");
     }
 
+    public String removeUnderscore(String string){
+        return string.replace("_", " ");
+    }
+
+    public String addUnderscoreAndUpperCase(String string){
+        return string.replace(" ", "_").toUpperCase();
+    }
+
     public void populateCategorySpinner(){
         categories = new ArrayList<>();
         for (Category category: Category.values()){
-            categories.add(category.toString());
+            String inputString = removeUnderscore(category.toString());
+            StringBuilder categoryCapitalized = new StringBuilder(inputString.toLowerCase());
+            categoryCapitalized.setCharAt(0, Character.toUpperCase(categoryCapitalized.charAt(0)));
+            categories.add(categoryCapitalized.toString());
         }
 
         categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,categories);
@@ -119,7 +130,7 @@ public class EditTaskActivity extends AppCompatActivity {
             String title = titleTextEdit.getText().toString();
             String description = descriptionTextEdit.getText().toString();
             String date = dateEditText.getText().toString();
-            String category = category_spinner.getSelectedItem().toString();
+            String category = addUnderscoreAndUpperCase(category_spinner.getSelectedItem().toString());
             Task task = new Task(title, description, date, Category.valueOf(category));
             sqlRunner.save(task);
             Intent intent = new Intent(this, TasksActivity.class);
@@ -160,7 +171,7 @@ public class EditTaskActivity extends AppCompatActivity {
         String title = titleTextEdit.getText().toString();
         String description = descriptionTextEdit.getText().toString();
         String date = dateEditText.getText().toString();
-        Category category = Category.valueOf(category_spinner.getSelectedItem().toString());
+        Category category = Category.valueOf(addUnderscoreAndUpperCase(category_spinner.getSelectedItem().toString()));
 
         Task taskToUpdate = new Task(id, title, description, date, category);
         sqlRunner.updateTask(taskToUpdate);
@@ -182,8 +193,14 @@ public class EditTaskActivity extends AppCompatActivity {
             finish();
             return true;
         }
+        String message = null;
+        if (bundleHasContents()){
+            message = "Do you want to discard your changes to this task?";
+        } else {
+            message = "Do you want to discard the current task?";
+        }
         AlertDialog alertbox = new AlertDialog.Builder(this)
-                .setMessage("Do you want to discard the current task?")
+                .setMessage(message)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
                         finish();

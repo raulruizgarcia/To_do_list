@@ -48,8 +48,10 @@
         android:layout_marginTop="60dp"
         android:text="@string/days_left_label"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        android:textSize="22sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -59,8 +61,10 @@
         android:layout_marginTop="60dp"
         android:text="@string/tastk_title_label"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="22sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="120dp" />
 
     <ListView
         android:id="@+id/listView"
@@ -68,9 +72,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:divider="@android:color/transparent"
-        android:dividerHeight="10.0sp"
+        android:dividerHeight="2.0sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         tools:layout_editor_absoluteX="0dp" />
+
 </android.support.constraint.ConstraintLayout>

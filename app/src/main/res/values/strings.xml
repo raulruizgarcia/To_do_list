@@ -22,4 +22,5 @@
     <string name="fiter_gigs">Gigs</string>
     <string name="filter_music">Music</string>
     <string name="filter_fun_stuff">Fun Stuff</string>
+    <string name="filter_show_all">Show all</string>
 </resources>

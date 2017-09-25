@@ -2,7 +2,6 @@ package com.example.user.todolist.category;
 
 
 public enum Category {
-    ADULT_STUFF,
     FOOD,
     MOVIES,
     BOOKS,
@@ -10,5 +9,6 @@ public enum Category {
     GIGS,
     MUSIC,
     FUN_STUFF,
-    CODING
+    CODING,
+    ADULT_STUFF,
 }

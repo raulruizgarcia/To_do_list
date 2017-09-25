@@ -1,11 +1,13 @@
 package com.example.user.todolist.activities;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -45,7 +47,9 @@ public class TasksActivity extends AppCompatActivity {
         deleteAllButton = (FloatingActionButton) findViewById(R.id.deleteAllFloatingButton);
         deleteAllButton.setVisibility(View.INVISIBLE);
         displayTasks();
+
     }
+
 
     public boolean filterContentByCategory(Category category){
         ArrayList<Task> result = new ArrayList<>();
@@ -63,6 +67,9 @@ public class TasksActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int selectedItemId = item.getItemId();
         switch (selectedItemId) {
+            case R.id.filter_show_all:
+                displayTasks();
+                break;
             case R.id.filter_adult_stuff:
                 filterContentByCategory(Category.ADULT_STUFF);
                 break;
@@ -153,35 +160,5 @@ public class TasksActivity extends AppCompatActivity {
         deleteTask(task);
 
     }
-
-    // All the commented out code below was responsible for the contextual menu
-
-
-
-//    @Override
-//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-//        super.onCreateContextMenu(menu, v, menuInfo);
-//        MenuInflater menuInflater = getMenuInflater();
-//        menuInflater.inflate(R.menu.menu_item, menu);
-//
-//    }
-//
-//    @Override
-//    public boolean onContextItemSelected(MenuItem item) {
-//        AdapterView.AdapterContextMenuInfo adapterContextMenuInfo =
-//                (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-//        int itemSelected = adapterContextMenuInfo.position;
-//        Task taskToActUpon = tasks.get(itemSelected);
-//        switch (item.getItemId()){
-//            case R.id.edit_menu_item:
-//                editTask(taskToActUpon);
-//                return true;
-//            case R.id.delete_menu_item:
-//                Toast.makeText(this, "Deleting item: " + itemSelected, Toast.LENGTH_LONG).show();
-//                deleteTask(taskToActUpon);
-//                return true;
-//        }
-//        return true;
-//    }
 
 }

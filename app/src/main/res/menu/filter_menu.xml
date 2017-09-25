@@ -4,6 +4,9 @@
 
 
     <item
+        android:id="@+id/filter_show_all"
+        android:title="@string/filter_show_all" />
+    <item
         android:id="@+id/filter_adult_stuff"
         android:title="@string/filter_adult_stuff_text" />
 
