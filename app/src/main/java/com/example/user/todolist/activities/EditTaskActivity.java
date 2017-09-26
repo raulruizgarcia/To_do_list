@@ -126,7 +126,6 @@ public class EditTaskActivity extends AppCompatActivity {
 
     public void onSaveNoteButtonPressed(View button){
         if (isTitleFieldValid()) {
-            Log.d("Title editText state:", titleTextEdit.getText().toString());
             String title = titleTextEdit.getText().toString();
             String description = descriptionTextEdit.getText().toString();
             String date = dateEditText.getText().toString();
