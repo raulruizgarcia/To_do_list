@@ -194,7 +194,7 @@ public class EditTaskActivity extends AppCompatActivity {
         }
         String message = null;
         if (bundleHasContents()){
-            message = "Do you want to discard your changes to this task?";
+            finish();
         } else {
             message = "Do you want to discard the current task?";
         }

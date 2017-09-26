@@ -43,9 +43,7 @@ public class TasksActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
         sqlRunner = new SqlRunner(this);
 
-        // Set back to visible after troubleshooting
         deleteAllButton = (FloatingActionButton) findViewById(R.id.deleteAllFloatingButton);
-        deleteAllButton.setVisibility(View.INVISIBLE);
         displayTasks();
 
     }
