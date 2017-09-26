@@ -68,6 +68,9 @@ public class TasksActivity extends AppCompatActivity {
             case R.id.filter_show_all:
                 displayTasks();
                 break;
+            case R.id.filter_show_urgent_recommendations:
+                displayUrgentTasks();
+                break;
             case R.id.filter_coding:
                 filterContentByCategory(Category.CODING);
                 break;
@@ -96,12 +99,16 @@ public class TasksActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.filter_menu, menu);
-        return true;
+    public void displayUrgentTasks() {
+        ArrayList<Task> tasks = sqlRunner.getAllTasks();
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task: tasks){
+            if (task.daysLeft() <= 7 && task.daysLeft() > 0){
+                result.add(task);
+            }
+        }
+        TaskAdapter taskAdapter = new TaskAdapter(this, result);
+        listView.setAdapter(taskAdapter);
     }
 
     public void editTask(Task task){
@@ -153,7 +160,13 @@ public class TasksActivity extends AppCompatActivity {
         View parentRow = (View) view.getParent();
         Task task = (Task) parentRow.getTag();
         deleteTask(task);
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.filter_menu, menu);
+        return true;
     }
 
 }

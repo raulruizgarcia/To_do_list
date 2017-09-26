@@ -27,7 +27,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         }
         Task currentTask = getItem(position);
 
-        TextView daysLeft = (TextView) taskItem.findViewById(R.id.categoryListView);
+        TextView daysLeft = (TextView) taskItem.findViewById(R.id.daysLeftView);
         daysLeft.setText(String.valueOf(currentTask.daysLeft()));
 
         TextView title = (TextView) taskItem.findViewById(R.id.titleListView);
