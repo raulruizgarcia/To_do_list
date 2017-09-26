@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:drawable/dialog_holo_light_frame"
-    app:layout_goneMarginBottom="20dp">
+    >
 
 
     <TextView
@@ -15,14 +15,13 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="7dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:lines="1"
         android:maxLines="1"
         android:onClick="onTaskPressed"
-        android:scrollHorizontally="true"
+
         android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/deleteImageButton"
@@ -32,11 +31,14 @@
         android:id="@+id/categoryListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="24dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="0dp"
         android:textAlignment="center"
+        android:textAllCaps="false"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleListView" />
 

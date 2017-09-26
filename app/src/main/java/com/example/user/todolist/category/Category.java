@@ -10,5 +10,4 @@ public enum Category {
     MUSIC,
     FUN_STUFF,
     CODING,
-    ADULT_STUFF,
 }

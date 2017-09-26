@@ -56,8 +56,8 @@ public class TasksActivity extends AppCompatActivity {
                 result.add(task);
             }
         }
-        TaskAdapter taskAdapter = new TaskAdapter(this, result);
-        listView.setAdapter(taskAdapter);
+        RecommendationAdapter recommendationAdapter = new RecommendationAdapter(this, result);
+        listView.setAdapter(recommendationAdapter);
         return true;
     }
 
@@ -67,9 +67,6 @@ public class TasksActivity extends AppCompatActivity {
         switch (selectedItemId) {
             case R.id.filter_show_all:
                 displayTasks();
-                break;
-            case R.id.filter_adult_stuff:
-                filterContentByCategory(Category.ADULT_STUFF);
                 break;
             case R.id.filter_coding:
                 filterContentByCategory(Category.CODING);

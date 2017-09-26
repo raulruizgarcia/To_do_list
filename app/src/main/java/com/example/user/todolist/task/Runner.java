@@ -16,7 +16,7 @@ public class Runner {
 
     public static void main (String[] args){
 
-        Task task = new Task("Title", "Description", "20-09-2017", Category.ADULT_STUFF);
+        Task task = new Task("Title", "Description", "20-09-2017", Category.FUN_STUFF);
         System.out.println(task.daysLeft());
 
     }

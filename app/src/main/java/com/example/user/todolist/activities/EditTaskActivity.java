@@ -72,11 +72,11 @@ public class EditTaskActivity extends AppCompatActivity {
 
         if (bundleHasContents()){
             populateFieldsWithExtras();
-            setTitle("Edit task");
+            setTitle("Edit recommendation");
             saveButton.setVisibility(View.INVISIBLE);
         } else {
             updateButton.setVisibility(View.INVISIBLE);
-            setTitle("Create a new task");
+            setTitle("New recommendation");
         }
 
     }
@@ -168,7 +168,7 @@ public class EditTaskActivity extends AppCompatActivity {
     }
 
     public void onUpdateNoteButtonPressed(View button){
-        Toast.makeText(this, "Task updated", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Recommendation updated", Toast.LENGTH_SHORT).show();
         Intent intent = getIntent();
         int id = Integer.parseInt(intent.getStringExtra("id"));
         String title = titleTextEdit.getText().toString();
