@@ -12,10 +12,13 @@ import com.example.user.todolist.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Created by user on 26/09/2017.
+ */
 
-public class TaskAdapter extends ArrayAdapter<Task> {
+public class RecommendationAdapter extends ArrayAdapter<Task> {
 
-    public TaskAdapter(Context context, ArrayList tasks){
+    public RecommendationAdapter (Context context, ArrayList tasks){
         super(context, 0, tasks);
     }
 
@@ -23,12 +26,12 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 
     public View getView(int position, View taskItem, ViewGroup parent){
         if (taskItem == null){
-            taskItem = LayoutInflater.from(getContext()).inflate(R.layout.activity_list_view, parent, false);
+            taskItem = LayoutInflater.from(getContext()).inflate(R.layout.activity_recommendations_list_view, parent, false);
         }
         Task currentTask = getItem(position);
 
-        TextView daysLeft = (TextView) taskItem.findViewById(R.id.categoryListView);
-        daysLeft.setText(String.valueOf(currentTask.daysLeft()));
+        TextView category = (TextView) taskItem.findViewById(R.id.categoryListView);
+        category.setText(String.valueOf(currentTask.getCategory()));
 
         TextView title = (TextView) taskItem.findViewById(R.id.titleListView);
         title.setText(currentTask.getTitle());

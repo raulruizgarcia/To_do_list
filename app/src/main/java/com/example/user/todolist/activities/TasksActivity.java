@@ -124,8 +124,8 @@ public class TasksActivity extends AppCompatActivity {
         } catch (Exception e){
             tasks = new ArrayList<>();
         }
-        TaskAdapter taskAdapter = new TaskAdapter(this, tasks);
-        listView.setAdapter(taskAdapter);
+        RecommendationAdapter recommendationAdapter = new RecommendationAdapter(this, tasks);
+        listView.setAdapter(recommendationAdapter);
 
     }
 
