@@ -12,22 +12,31 @@
         android:id="@+id/daysLeftView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_marginLeft="32dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_bias="0.516" />
 
     <TextView
         android:id="@+id/categoryListView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:textAlignment="center"
-        android:textSize="22sp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.517" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/daysLeftView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleListView"
+        app:layout_constraintVertical_bias="0.125" />
 
     <TextView
         android:id="@+id/titleListView"
@@ -36,7 +45,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="0dp"
         android:ellipsize="end"
         android:lines="1"
         android:maxLines="1"
@@ -44,7 +53,7 @@
         android:scrollHorizontally="true"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/categoryListView"
+        app:layout_constraintLeft_toRightOf="@+id/daysLeftView"
         app:layout_constraintRight_toLeftOf="@+id/deleteImageButton"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,5 +69,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="days left"
+        android:textSize="10sp"
+        app:layout_constraintTop_toBottomOf="@+id/daysLeftView"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="@+id/daysLeftView"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/daysLeftView"
+        app:layout_constraintHorizontal_bias="0.578" />
 
 </android.support.constraint.ConstraintLayout>

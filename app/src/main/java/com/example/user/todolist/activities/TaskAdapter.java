@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.user.todolist.R;
+import com.example.user.todolist.category.Category;
 import com.example.user.todolist.task.Task;
 
 import java.util.ArrayList;
@@ -33,8 +34,22 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         TextView title = (TextView) taskItem.findViewById(R.id.titleListView);
         title.setText(currentTask.getTitle());
 
+        TextView category = (TextView) taskItem.findViewById(R.id.categoryListView);
+        category.setText(capitalizeCategory(currentTask.getCategory()));
+
         taskItem.setTag(currentTask);
         return taskItem;
+    }
+
+    public String removeUnderscore(String string){
+        return string.replace("_", " ");
+    }
+
+    public String capitalizeCategory(Category category) {
+        String inputString = removeUnderscore(category.toString());
+        StringBuilder categoryCapitalized = new StringBuilder(inputString.toLowerCase());
+        categoryCapitalized.setCharAt(0, Character.toUpperCase(categoryCapitalized.charAt(0)));
+        return categoryCapitalized.toString();
     }
 
 }
