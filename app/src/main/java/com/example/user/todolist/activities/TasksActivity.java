@@ -60,16 +60,22 @@ public class TasksActivity extends AppCompatActivity {
         displayTasks();
     }
 
-    public boolean filterContentByCategory(Category category){
-        ArrayList<Task> result = new ArrayList<>();
-        for (Task task: tasks){
-            if (task.getCategory() == category){
-                result.add(task);
-            }
-        }
-        RecommendationAdapter recommendationAdapter = new RecommendationAdapter(this, result);
-        listView.setAdapter(recommendationAdapter);
-        return true;
+    @Override
+    protected void onResume(){
+        resetFilters();
+        super.onResume();
+
+    }
+
+    public void resetFilters(){
+        coding = false;
+        movies = false;
+        food = false;
+        books = false;
+        games = false;
+        gigs = false;
+        music = false;
+        fun_stuff = false;
     }
 
     @Override
@@ -80,6 +86,9 @@ public class TasksActivity extends AppCompatActivity {
                 break;
             case R.id.filter_show_urgent_recommendations:
                 displayUrgentTasks();
+                break;
+            case R.id.generate_test_array:
+                generateTestArray();
                 break;
             case R.id.filter_food:
                 food = !item.isChecked();
@@ -141,7 +150,7 @@ public class TasksActivity extends AppCompatActivity {
         ArrayList<Task> result = new ArrayList<>();
         if (checkFiltersAreApplied()) {
             if (coding) {
-                    result.addAll(Task.returnTaskOfCategory(origin, Category.CODING));
+                result.addAll(Task.returnTaskOfCategory(origin, Category.CODING));
             }
             if (food) {
                 result.addAll(Task.returnTaskOfCategory(origin, Category.FOOD));
@@ -168,10 +177,7 @@ public class TasksActivity extends AppCompatActivity {
             RecommendationAdapter recommendationAdapter = new RecommendationAdapter(this, tasks);
             listView.setAdapter(recommendationAdapter);
         }
-
-
     }
-
 
     public void generateTestArray(){
         for (Task task: Task.returnTestArray()){
@@ -260,14 +266,6 @@ public class TasksActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.filter_menu, menu);
         return true;
-    }
-
-    public void switchToggle(ToggleButton toggleButton){
-        if (toggleButton.isChecked()){
-            toggleButton.setChecked(false);
-        } else {
-            toggleButton.setChecked(true);
-        }
     }
 
 }
