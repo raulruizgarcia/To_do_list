@@ -114,10 +114,11 @@ public class Task implements Comparable<Task> {
     public static ArrayList<Task> returnTestArray(){
         ArrayList<Task> result = new ArrayList<>();
         Task task1 = new Task("It, the novel", "", "", Category.BOOKS);
-        Task task2 = new Task("Ratho Climbing Arena", "", "", Category.FUN_STUFF);
+        Task task2 = new Task("The handmaid's tale", "", "", Category.BOOKS);
         Task task3 = new Task("Queens of Stone Age: Villains", "", "", Category.MUSIC);
         Task task4 = new Task("Buy Tickets for Kasabian", "", "2-10-2017", Category.GIGS);
-        Task task5 = new Task("Learn Android Studio", "", "", Category.CODING);
+        Task task8 = new Task("Learn Android Studio", "", "", Category.CODING);
+        Task task5 = new Task("Learn C#", "", "", Category.CODING);
         Task task6 = new Task("Cameo Cinema", "", "", Category.MOVIES);
         Task task7 = new Task("Ramen", "", "", Category.FOOD);
         result.add(task1);
@@ -127,6 +128,7 @@ public class Task implements Comparable<Task> {
         result.add(task5);
         result.add(task6);
         result.add(task7);
+        result.add(task8);
         return result;
     }
 

@@ -41,22 +41,22 @@ public class TasksActivity extends AppCompatActivity {
     private boolean movies = false;
     private boolean food = false;
     private boolean books = false;
-    private boolean games = false;
     private boolean gigs = false;
     private boolean music = false;
-    private boolean fun_stuff = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadActivity();
+
+    }
+
+    private void loadActivity(){
         setContentView(R.layout.activity_tasks);
 
-        // initialise items and get a hold of views
         listView = (ListView) findViewById(R.id.listView);
         sqlRunner = new SqlRunner(this);
-
-        deleteAllButton = (FloatingActionButton) findViewById(R.id.deleteAllFloatingButton);
         displayTasks();
     }
 
@@ -72,10 +72,8 @@ public class TasksActivity extends AppCompatActivity {
         movies = false;
         food = false;
         books = false;
-        games = false;
         gigs = false;
         music = false;
-        fun_stuff = false;
     }
 
     @Override
@@ -110,11 +108,6 @@ public class TasksActivity extends AppCompatActivity {
                 item.setChecked(books);
                 applyFilters();
                 break;
-            case R.id.filter_games:
-                games = !item.isChecked();
-                item.setChecked(games);
-                applyFilters();
-                break;
             case R.id.filter_gigs:
                 gigs = !item.isChecked();
                 item.setChecked(gigs);
@@ -125,11 +118,6 @@ public class TasksActivity extends AppCompatActivity {
                 item.setChecked(music);
                 applyFilters();
                 break;
-            case R.id.filter_fun_stuff:
-                fun_stuff = !item.isChecked();
-                item.setChecked(fun_stuff);
-                applyFilters();
-                break;
             default:
                 return false;
         }
@@ -137,7 +125,7 @@ public class TasksActivity extends AppCompatActivity {
     }
 
     public boolean checkFiltersAreApplied(){
-        if (coding || movies || food || books || games || gigs || music || fun_stuff){
+        if (coding || movies || food || books || gigs || music){
             return true;
         } else {
             displayTasks();
@@ -161,17 +149,11 @@ public class TasksActivity extends AppCompatActivity {
             if (books) {
                 result.addAll(Task.returnTaskOfCategory(origin, Category.BOOKS));
             }
-            if (games) {
-                result.addAll(Task.returnTaskOfCategory(origin, Category.GAMES));
-            }
             if (gigs) {
                 result.addAll(Task.returnTaskOfCategory(origin, Category.GIGS));
             }
             if (music) {
                 result.addAll(Task.returnTaskOfCategory(origin, Category.MUSIC));
-            }
-            if (fun_stuff) {
-                result.addAll(Task.returnTaskOfCategory(origin, Category.FUN_STUFF));
             }
             tasks = result;
             RecommendationAdapter recommendationAdapter = new RecommendationAdapter(this, tasks);
@@ -225,6 +207,23 @@ public class TasksActivity extends AppCompatActivity {
         displayTasks();
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem checkable = menu.findItem(R.id.filter_food);
+        checkable.setChecked(food);
+        checkable = menu.findItem(R.id.filter_books);
+        checkable.setChecked(books);
+        checkable = menu.findItem(R.id.filter_coding);
+        checkable.setChecked(coding);
+        checkable = menu.findItem(R.id.filter_movies);
+        checkable.setChecked(movies);
+        checkable = menu.findItem(R.id.filter_gigs);
+        checkable.setChecked(gigs);
+        checkable = menu.findItem(R.id.filter_music);
+        checkable.setChecked(music);
+        return true;
+    }
+
     public void onNewTaskFloatingButtonPressed(View floatingButton){
         Intent intent = new Intent(this, EditTaskActivity.class);
         startActivity(intent);
@@ -239,6 +238,7 @@ public class TasksActivity extends AppCompatActivity {
                         tasks = new ArrayList<>();
                         TaskAdapter taskAdapter = new TaskAdapter(floatingButton.getContext(), tasks);
                         listView.setAdapter(taskAdapter);
+                        resetFilters();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {

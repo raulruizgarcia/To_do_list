@@ -29,10 +29,6 @@
         android:checkable="true"
         android:title="@string/filter_books" />
     <item
-        android:id="@+id/filter_games"
-        android:checkable="true"
-        android:title="@string/filter_games" />
-    <item
         android:id="@+id/filter_gigs"
         android:checkable="true"
         android:title="@string/fiter_gigs" />
@@ -40,9 +36,5 @@
         android:id="@+id/filter_music"
         android:checkable="true"
         android:title="@string/filter_music" />
-    <item
-        android:id="@+id/filter_fun_stuff"
-        android:checkable="true"
-        android:title="@string/filter_fun_stuff" />
 
 </menu>
