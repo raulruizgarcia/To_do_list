@@ -111,7 +111,7 @@ public class Task implements Comparable<Task> {
         }
     }
 
-    static ArrayList<Task> returnTestArray(){
+    public static ArrayList<Task> returnTestArray(){
         ArrayList<Task> result = new ArrayList<>();
         Task task1 = new Task("It, the novel", "", "", Category.BOOKS);
         Task task2 = new Task("Ratho Climbing Arena", "", "", Category.FUN_STUFF);

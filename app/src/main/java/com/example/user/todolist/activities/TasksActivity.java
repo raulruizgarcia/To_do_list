@@ -95,8 +95,18 @@ public class TasksActivity extends AppCompatActivity {
             case R.id.filter_fun_stuff:
                 filterContentByCategory(Category.FUN_STUFF);
                 break;
+            case R.id.generate_test_array:
+                generateTestArray();
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void generateTestArray(){
+        for (Task task: Task.returnTestArray()){
+            sqlRunner.save(task);
+        }
+        displayTasks();
     }
 
     public void displayUrgentTasks() {
