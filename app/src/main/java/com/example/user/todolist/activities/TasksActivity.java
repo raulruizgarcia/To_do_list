@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -36,7 +38,6 @@ public class TasksActivity extends AppCompatActivity {
     ArrayList<Task> tasks;
     ListView listView;
     SqlRunner sqlRunner;
-    FloatingActionButton deleteAllButton;
     private boolean coding = false;
     private boolean movies = false;
     private boolean food = false;
@@ -257,6 +258,7 @@ public class TasksActivity extends AppCompatActivity {
     }
 
     public void onDeleteItemButtonPressed(View view){
+//        view.animate().translationY(50);
         View parentRow = (View) view.getParent();
         Task task = (Task) parentRow.getTag();
         deleteTask(task);
