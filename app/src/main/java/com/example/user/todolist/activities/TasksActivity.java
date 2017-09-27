@@ -211,6 +211,7 @@ public class TasksActivity extends AppCompatActivity {
     public void deleteTask(Task task) {
         sqlRunner.deleteTask(task);
         displayTasks();
+        applyFilters();
     }
 
     @Override
