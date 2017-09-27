@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -32,6 +33,7 @@ import com.example.user.todolist.task.Task;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.TimeUnit;
 
 public class TasksActivity extends AppCompatActivity {
 
@@ -52,6 +54,8 @@ public class TasksActivity extends AppCompatActivity {
         loadActivity();
 
     }
+
+
 
     private void loadActivity(){
         setContentView(R.layout.activity_tasks);
@@ -257,12 +261,22 @@ public class TasksActivity extends AppCompatActivity {
         editTask(task);
     }
 
-    public void onDeleteItemButtonPressed(View view){
-//        view.animate().translationY(50);
-        View parentRow = (View) view.getParent();
-        Task task = (Task) parentRow.getTag();
-        deleteTask(task);
-    }
+    public void onDeleteItemButtonPressed(final View view){
+        final View parentRow = (View) view.getParent();
+
+        Animation fadeout = new AlphaAnimation(1.f, 0.f);
+        fadeout.setDuration(1000);
+        parentRow.startAnimation(fadeout);
+        parentRow.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                parentRow.setVisibility(View.GONE);
+                Task task = (Task) parentRow.getTag();
+                deleteTask(task);
+            }
+        }, 1000);
+
+}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
