@@ -10,35 +10,39 @@
         android:id="@+id/filter_show_urgent_recommendations"
         android:title="@string/filter_show_urgent_recommendations" />
     <item
-        android:id="@+id/filter_adult_stuff"
-        android:title="@string/filter_adult_stuff_text" />
-
+        android:id="@+id/generate_test_array"
+        android:title="@string/generate_test_array" />
     <item
         android:id="@+id/filter_coding"
+        android:checkable="true"
         android:title="@string/filter_coding_text" />
-
     <item
         android:id="@+id/filter_movies"
+        android:checkable="true"
         android:title="@string/filter_movies_text" />
     <item
         android:id="@+id/filter_food"
+        android:checkable="true"
         android:title="@string/filter_food" />
     <item
         android:id="@+id/filter_books"
+        android:checkable="true"
         android:title="@string/filter_books" />
     <item
         android:id="@+id/filter_games"
+        android:checkable="true"
         android:title="@string/filter_games" />
     <item
         android:id="@+id/filter_gigs"
+        android:checkable="true"
         android:title="@string/fiter_gigs" />
     <item
         android:id="@+id/filter_music"
+        android:checkable="true"
         android:title="@string/filter_music" />
     <item
         android:id="@+id/filter_fun_stuff"
+        android:checkable="true"
         android:title="@string/filter_fun_stuff" />
-    <item
-        android:id="@+id/generate_test_array"
-        android:title="@string/generate_test_array" />
+
 </menu>

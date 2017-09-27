@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.example.user.todolist.R;
 import com.example.user.todolist.category.Category;
@@ -42,6 +43,8 @@ public class TasksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tasks);
 
         // initialise items and get a hold of views
+        ToggleButton simpleToggleButton = (ToggleButton) findViewById(R.id.testToggleButton); // initiate a toggle button
+        Boolean ToggleButtonState = simpleToggleButton.isChecked(); // check current state of a toggle button (true or false).
         listView = (ListView) findViewById(R.id.listView);
         sqlRunner = new SqlRunner(this);
 
