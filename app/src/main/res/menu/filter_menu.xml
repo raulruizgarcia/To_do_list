@@ -38,4 +38,7 @@
     <item
         android:id="@+id/filter_fun_stuff"
         android:title="@string/filter_fun_stuff" />
+    <item
+        android:id="@+id/generate_test_array"
+        android:title="@string/generate_test_array" />
 </menu>

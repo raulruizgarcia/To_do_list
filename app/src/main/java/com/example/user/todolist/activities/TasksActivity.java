@@ -1,10 +1,12 @@
 package com.example.user.todolist.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -45,9 +47,7 @@ public class TasksActivity extends AppCompatActivity {
 
         deleteAllButton = (FloatingActionButton) findViewById(R.id.deleteAllFloatingButton);
         displayTasks();
-
     }
-
 
     public boolean filterContentByCategory(Category category){
         ArrayList<Task> result = new ArrayList<>();
@@ -143,11 +143,23 @@ public class TasksActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onDeleteAllButtonPressed(View floatingButton){
-        sqlRunner.deleteAllTasks();
-        tasks = new ArrayList<>();
-        TaskAdapter taskAdapter = new TaskAdapter(this, tasks);
-        listView.setAdapter(taskAdapter);
+    public void onDeleteAllButtonPressed(final View floatingButton){
+        AlertDialog alertbox = new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to delete all your tasks?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        sqlRunner.deleteAllTasks();
+                        tasks = new ArrayList<>();
+                        TaskAdapter taskAdapter = new TaskAdapter(floatingButton.getContext(), tasks);
+                        listView.setAdapter(taskAdapter);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    // do something when the button is clicked
+                    public void onClick(DialogInterface arg0, int arg1) {
+                    }
+                })
+                .show();
     }
 
     public void onTaskPressed(View view){

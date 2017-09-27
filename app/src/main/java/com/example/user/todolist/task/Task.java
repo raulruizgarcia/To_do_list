@@ -3,9 +3,11 @@ package com.example.user.todolist.task;
 import android.support.annotation.NonNull;
 
 import com.example.user.todolist.category.Category;
+import com.example.user.todolist.sqlRunner.SqlRunner;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -107,6 +109,25 @@ public class Task implements Comparable<Task> {
         } else {
             return -1;
         }
+    }
+
+    static ArrayList<Task> returnTestArray(){
+        ArrayList<Task> result = new ArrayList<>();
+        Task task1 = new Task("It, the novel", "", "", Category.BOOKS);
+        Task task2 = new Task("Ratho Climbing Arena", "", "", Category.FUN_STUFF);
+        Task task3 = new Task("Queens of Stone Age: Villains", "", "", Category.MUSIC);
+        Task task4 = new Task("Buy Tickets for Kasabian", "", "2-10-2017", Category.GIGS);
+        Task task5 = new Task("Learn Android Studio", "", "", Category.CODING);
+        Task task6 = new Task("Cameo Cinema", "", "", Category.MOVIES);
+        Task task7 = new Task("Ramen", "", "", Category.FOOD);
+        result.add(task1);
+        result.add(task2);
+        result.add(task3);
+        result.add(task4);
+        result.add(task5);
+        result.add(task6);
+        result.add(task7);
+        return result;
     }
 
 
