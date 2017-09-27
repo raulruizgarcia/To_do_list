@@ -80,6 +80,7 @@ public class TasksActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.filter_show_all:
+                resetFilters();
                 displayTasks();
                 break;
             case R.id.filter_show_urgent_recommendations:
