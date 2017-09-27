@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.MenuItemImpl;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -36,6 +37,15 @@ public class TasksActivity extends AppCompatActivity {
     ListView listView;
     SqlRunner sqlRunner;
     FloatingActionButton deleteAllButton;
+    private boolean coding = false;
+    private boolean movies = false;
+    private boolean food = false;
+    private boolean books = false;
+    private boolean games = false;
+    private boolean gigs = false;
+    private boolean music = false;
+    private boolean fun_stuff = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +53,6 @@ public class TasksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tasks);
 
         // initialise items and get a hold of views
-        ToggleButton simpleToggleButton = (ToggleButton) findViewById(R.id.testToggleButton); // initiate a toggle button
-        Boolean ToggleButtonState = simpleToggleButton.isChecked(); // check current state of a toggle button (true or false).
         listView = (ListView) findViewById(R.id.listView);
         sqlRunner = new SqlRunner(this);
 
@@ -66,44 +74,104 @@ public class TasksActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int selectedItemId = item.getItemId();
-        switch (selectedItemId) {
+        switch (item.getItemId()) {
             case R.id.filter_show_all:
                 displayTasks();
                 break;
             case R.id.filter_show_urgent_recommendations:
                 displayUrgentTasks();
                 break;
-            case R.id.filter_coding:
-                filterContentByCategory(Category.CODING);
-                break;
             case R.id.filter_food:
-                filterContentByCategory(Category.FOOD);
+                food = !item.isChecked();
+                item.setChecked(food);
+                applyFilters();
+                break;
+            case R.id.filter_coding:
+                coding = !item.isChecked();
+                item.setChecked(coding);
+                applyFilters();
                 break;
             case R.id.filter_movies:
-                filterContentByCategory(Category.MOVIES);
+                movies = !item.isChecked();
+                item.setChecked(movies);
+                applyFilters();
                 break;
             case R.id.filter_books:
-                filterContentByCategory(Category.BOOKS);
+                books = !item.isChecked();
+                item.setChecked(books);
+                applyFilters();
                 break;
             case R.id.filter_games:
-                filterContentByCategory(Category.GAMES);
+                games = !item.isChecked();
+                item.setChecked(games);
+                applyFilters();
                 break;
             case R.id.filter_gigs:
-                filterContentByCategory(Category.GIGS);
+                gigs = !item.isChecked();
+                item.setChecked(gigs);
+                applyFilters();
                 break;
             case R.id.filter_music:
-                filterContentByCategory(Category.MUSIC);
+                music = !item.isChecked();
+                item.setChecked(music);
+                applyFilters();
                 break;
             case R.id.filter_fun_stuff:
-                filterContentByCategory(Category.FUN_STUFF);
+                fun_stuff = !item.isChecked();
+                item.setChecked(fun_stuff);
+                applyFilters();
                 break;
-            case R.id.generate_test_array:
-                generateTestArray();
-                break;
+            default:
+                return false;
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
+
+    public boolean checkFiltersAreApplied(){
+        if (coding || movies || food || books || games || gigs || music || fun_stuff){
+            return true;
+        } else {
+            displayTasks();
+            return false;
+        }
+    }
+
+    public void applyFilters(){
+        ArrayList<Task> origin = sqlRunner.getAllTasks();
+        ArrayList<Task> result = new ArrayList<>();
+        if (checkFiltersAreApplied()) {
+            if (coding) {
+                    result.addAll(Task.returnTaskOfCategory(origin, Category.CODING));
+            }
+            if (food) {
+                result.addAll(Task.returnTaskOfCategory(origin, Category.FOOD));
+            }
+            if (movies) {
+                result.addAll(Task.returnTaskOfCategory(origin, Category.MOVIES));
+            }
+            if (books) {
+                result.addAll(Task.returnTaskOfCategory(origin, Category.BOOKS));
+            }
+            if (games) {
+                result.addAll(Task.returnTaskOfCategory(origin, Category.GAMES));
+            }
+            if (gigs) {
+                result.addAll(Task.returnTaskOfCategory(origin, Category.GIGS));
+            }
+            if (music) {
+                result.addAll(Task.returnTaskOfCategory(origin, Category.MUSIC));
+            }
+            if (fun_stuff) {
+                result.addAll(Task.returnTaskOfCategory(origin, Category.FUN_STUFF));
+            }
+            tasks = result;
+            RecommendationAdapter recommendationAdapter = new RecommendationAdapter(this, tasks);
+            listView.setAdapter(recommendationAdapter);
+        }
+
+
+    }
+
 
     public void generateTestArray(){
         for (Task task: Task.returnTestArray()){
@@ -192,6 +260,14 @@ public class TasksActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.filter_menu, menu);
         return true;
+    }
+
+    public void switchToggle(ToggleButton toggleButton){
+        if (toggleButton.isChecked()){
+            toggleButton.setChecked(false);
+        } else {
+            toggleButton.setChecked(true);
+        }
     }
 
 }

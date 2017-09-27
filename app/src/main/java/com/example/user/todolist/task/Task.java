@@ -130,5 +130,15 @@ public class Task implements Comparable<Task> {
         return result;
     }
 
+    public static ArrayList<Task> returnTaskOfCategory (ArrayList<Task> arrayList, Category category){
+        ArrayList<Task> resultArray = new ArrayList<>();
+        for (Task task: arrayList){
+            if (task.getCategory().equals(category)){
+                resultArray.add(task);
+            }
+        }
+        return resultArray;
+    }
+
 
 }
