@@ -52,7 +52,6 @@ public class TasksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loadActivity();
-
     }
 
 
@@ -69,7 +68,6 @@ public class TasksActivity extends AppCompatActivity {
     protected void onResume(){
         resetFilters();
         super.onResume();
-
     }
 
     public void resetFilters(){
