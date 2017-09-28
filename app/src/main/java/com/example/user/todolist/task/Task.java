@@ -1,10 +1,6 @@
 package com.example.user.todolist.task;
 
-import android.support.annotation.NonNull;
-
 import com.example.user.todolist.category.Category;
-import com.example.user.todolist.sqlRunner.SqlRunner;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,7 +8,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-//import java.util.*;
 
 public class Task implements Comparable<Task> {
 
@@ -113,7 +108,7 @@ public class Task implements Comparable<Task> {
 
     public static ArrayList<Task> returnTestArray(){
         ArrayList<Task> result = new ArrayList<>();
-        Task task1 = new Task("It, the novel", "", "", Category.BOOKS);
+        Task task1 = new Task("It, a novel", "", "", Category.BOOKS);
         Task task2 = new Task("The handmaid's tale", "", "", Category.BOOKS);
         Task task3 = new Task("Queens of Stone Age: Villains", "", "", Category.MUSIC);
         Task task4 = new Task("Buy Tickets for Kasabian", "", "2-10-2017", Category.GIGS);
@@ -141,6 +136,5 @@ public class Task implements Comparable<Task> {
         }
         return resultArray;
     }
-
 
 }

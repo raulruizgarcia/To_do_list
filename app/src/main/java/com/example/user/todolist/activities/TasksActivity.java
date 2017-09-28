@@ -2,38 +2,22 @@ package com.example.user.todolist.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.MenuItemImpl;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
-
 import com.example.user.todolist.R;
 import com.example.user.todolist.category.Category;
 import com.example.user.todolist.sqlRunner.SqlRunner;
 import com.example.user.todolist.task.Task;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.concurrent.TimeUnit;
 
 public class TasksActivity extends AppCompatActivity {
 

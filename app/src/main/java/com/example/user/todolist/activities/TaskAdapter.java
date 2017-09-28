@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import com.example.user.todolist.R;
 import com.example.user.todolist.category.Category;
 import com.example.user.todolist.task.Task;
