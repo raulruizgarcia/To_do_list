@@ -1,6 +1,7 @@
 package com.example.user.todolist.activities;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ public class RecommendationAdapter extends ArrayAdapter<Recommendation> {
         Recommendation currentRecommendation = getItem(position);
 
         TextView category = (TextView) recommendationItem.findViewById(R.id.categoryListView);
+        Log.d("category title", Category.getCategory(currentRecommendation.getCategoryId()).getTitle() );
         category.setText(Category.getCategory(currentRecommendation.getCategoryId()).getTitle());
 
         TextView title = (TextView) recommendationItem.findViewById(R.id.titleListView);
