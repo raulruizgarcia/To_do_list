@@ -39,8 +39,6 @@ public class TasksActivity extends AppCompatActivity {
         loadActivity();
     }
 
-
-
     private void loadActivity(){
         setContentView(R.layout.activity_tasks);
 
@@ -165,8 +163,8 @@ public class TasksActivity extends AppCompatActivity {
                 result.add(recommendation);
             }
         }
-        TaskAdapter taskAdapter = new TaskAdapter(this, result);
-        listView.setAdapter(taskAdapter);
+        RecommendationDateAdapter recommendationDateAdapter = new RecommendationDateAdapter(this, result);
+        listView.setAdapter(recommendationDateAdapter);
     }
 
     public void editTask(Recommendation recommendation){
@@ -226,8 +224,8 @@ public class TasksActivity extends AppCompatActivity {
                     public void onClick(DialogInterface arg0, int arg1) {
                         sqlRunner.deleteAllTasks();
                         recommendations = new ArrayList<>();
-                        TaskAdapter taskAdapter = new TaskAdapter(floatingButton.getContext(), recommendations);
-                        listView.setAdapter(taskAdapter);
+                        RecommendationDateAdapter recommendationDateAdapter = new RecommendationDateAdapter(floatingButton.getContext(), recommendations);
+                        listView.setAdapter(recommendationDateAdapter);
                         resetFilters();
                     }
                 })
