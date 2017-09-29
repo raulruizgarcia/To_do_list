@@ -1,10 +1,9 @@
-package com.example.user.todolist.task;
+package com.example.user.todolist.recommendations;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.user.todolist.category.Category;
 import com.example.user.todolist.sqlRunner.SqlRunner;
 
 import java.text.ParseException;

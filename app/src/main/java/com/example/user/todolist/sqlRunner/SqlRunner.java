@@ -1,16 +1,9 @@
 package com.example.user.todolist.sqlRunner;
 
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import com.example.user.todolist.category.Category;
-import com.example.user.todolist.task.Recommendation;
-
-import java.util.ArrayList;
 
 public class SqlRunner extends SQLiteOpenHelper {
 

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.user.todolist.R;
 import com.example.user.todolist.category.Category;
-import com.example.user.todolist.task.Recommendation;
+import com.example.user.todolist.recommendations.Recommendation;
 
 import java.util.ArrayList;
 
