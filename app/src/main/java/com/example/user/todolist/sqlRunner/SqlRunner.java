@@ -17,15 +17,19 @@ public class SqlRunner extends SQLiteOpenHelper {
     // Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
-    private static final String DATABASE_NAME = "taskdb";
+    private static final String DATABASE_NAME = "recommendationsdb";
     // Contacts table name
-    private static final String TABLE_TASKS = "tasks_table";
+    private static final String TABLE_RECOMMENDATIONS = "recommendations";
+    private static final String TABLE_CATEGORIES = "categories";
     // Tasks Table Columns names
-    private static final String COLUMN_ID = "id";
-    private static final String COLUMN_TITLE = "title";
-    private static final String COLUMN_DESCRIPTION = "description";
-    private static final String COLUMN_DATE = "date";
-    private static final String COLUMN_CATEGORY = "category";
+    private static final String RECOMMENDATIONS_COLUMN_ID = "id";
+    private static final String RECOMMENDATIONS_COLUMN_TITLE = "title";
+    private static final String RECOMMENDATIONS_COLUMN_DESCRIPTION = "description";
+    private static final String RECOMMENDATIONS_COLUMN_DATE = "date";
+    private static final String RECOMMENDATIONS_COLUMN_CATEGORY_ID = "category_id";
+    // Categories Table Columns names
+    private static final String CATEGORIES_COLUMN_ID = "id";
+    private static final String CATEGORIES_COLUMN_TITLE = "title";
 
 
     public SqlRunner(Context context) {
@@ -34,105 +38,33 @@ public class SqlRunner extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_TASKS + "("
-                + COLUMN_ID + " INTEGER PRIMARY KEY," + COLUMN_TITLE + " TEXT,"
-                + COLUMN_DESCRIPTION + " TEXT,"
-                + COLUMN_DATE + " TEXT,"
-                + COLUMN_CATEGORY + " TEXT"
+        String CREATE_RECOMMENDATIONS_TABLE = "CREATE TABLE " + TABLE_RECOMMENDATIONS + "("
+                + RECOMMENDATIONS_COLUMN_ID + " INTEGER PRIMARY KEY," + RECOMMENDATIONS_COLUMN_TITLE + " TEXT,"
+                + RECOMMENDATIONS_COLUMN_DESCRIPTION + " TEXT,"
+                + RECOMMENDATIONS_COLUMN_DATE + " TEXT,"
+                + RECOMMENDATIONS_COLUMN_CATEGORY_ID + " INTEGER NOT NULL, "
+                + "FOREIGN KEY(" + RECOMMENDATIONS_COLUMN_CATEGORY_ID + ") REFERENCES "
+                + TABLE_CATEGORIES + " ("
                 + ")";
-        db.execSQL(CREATE_CONTACTS_TABLE);
+
+        String CREATE_CATEGORIES_TABLE = "CREATE TABLE " + TABLE_CATEGORIES + "("
+                + CATEGORIES_COLUMN_ID + " INTEGER PRIMARY KEY,"
+                + CATEGORIES_COLUMN_TITLE+ " TEXT,"
+                + "CONSTRAINT title_unique UNIQUE (" + CATEGORIES_COLUMN_TITLE
+                + ")";
+
+        db.execSQL(CREATE_RECOMMENDATIONS_TABLE);
+        db.execSQL(CREATE_CATEGORIES_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASKS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECOMMENDATIONS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORIES);
         // Creating tables again
         onCreate(db);
     }
-
-    public boolean save (Recommendation recommendation){
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_TITLE, recommendation.getTitle());
-        contentValues.put(COLUMN_DESCRIPTION, recommendation.getDescription());
-
-        if (recommendation.getDate() != null) {
-            contentValues.put(COLUMN_DATE, recommendation.getDate());
-        }
-        if (recommendation.getCategory() != null) {
-            contentValues.put(COLUMN_CATEGORY, recommendation.getCategory().toString());
-        }
-
-        long result = db.insert(TABLE_TASKS, null, contentValues);
-        if (result == -1) {
-            return false;
-        }
-        else {
-            recommendation.setId((int) (long) result);
-            return true;
-        }
-    }
-
-    public ArrayList<Recommendation> getAllTasks() {
-        ArrayList<Recommendation> recommendations = new ArrayList<>();
-        String selectQuery = "SELECT * FROM " + TABLE_TASKS;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        if (cursor.moveToFirst()) {
-            do {
-                Recommendation recommendation = new Recommendation();
-                recommendation.setId(Integer.parseInt(cursor.getString(0)));
-                recommendation.setTitle(cursor.getString(1));
-                recommendation.setDescription(cursor.getString(2));
-                recommendation.setDate(cursor.getString(3));
-                recommendation.setCategory(Category.valueOf(cursor.getString(4)));
-
-                recommendations.add(recommendation);
-            } while (cursor.moveToNext());
-        }
-        // return contact list
-        return recommendations;
-    }
-
-    public Recommendation getTask(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_TASKS, new String[] { COLUMN_ID, COLUMN_TITLE, COLUMN_DESCRIPTION, COLUMN_DATE, COLUMN_CATEGORY },
-                COLUMN_ID + "=?", new String[] { String.valueOf(id) },
-                null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
-        Recommendation recommendation = new Recommendation(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2), cursor.getString(3), Category.valueOf(cursor.getString(4)));
-        // return recommendation
-        return recommendation;
-    }
-
-    public int updateTask(Recommendation recommendation) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_TITLE, recommendation.getTitle());
-        values.put(COLUMN_DESCRIPTION, recommendation.getDescription());
-        values.put(COLUMN_DATE, recommendation.getDate());
-        values.put(COLUMN_CATEGORY, recommendation.getCategory().toString());
-        // updating row
-        return db.update(TABLE_TASKS, values, COLUMN_ID + " = ?",
-                new String[]{String.valueOf(recommendation.getId())});
-    }
-
-
-    public void deleteTask(Recommendation recommendation) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_TASKS, COLUMN_ID + " = ?",
-                new String[] { String.valueOf(recommendation.getId()) });
-        db.close();
-    }
-
-    public void deleteAllTasks(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_TASKS);
-    }
-
 
 
 
