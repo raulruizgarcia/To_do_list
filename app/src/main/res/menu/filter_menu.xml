@@ -13,7 +13,8 @@
         android:title="@string/filter_show_urgent_recommendations" />
     <item
         android:id="@+id/generate_test_array"
-        android:title="@string/generate_test_array" />
+        android:title="@string/generate_test_array"
+         />
     <item
         android:id="@+id/filter_coding"
         android:checkable="true"
