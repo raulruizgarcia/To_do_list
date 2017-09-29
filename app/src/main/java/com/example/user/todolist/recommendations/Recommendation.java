@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.user.todolist.activities.RecommendationsActivity;
 import com.example.user.todolist.sqlRunner.SqlRunner;
 
 import java.text.ParseException;
@@ -22,6 +23,7 @@ public class Recommendation implements Comparable<Recommendation> {
     private String date;
     private int categoryId;
     private static SqlRunner sqlRunner;
+
 
     // Recommendations Table Name
     private static final String TABLE_RECOMMENDATIONS = "recommendations";
