@@ -5,7 +5,9 @@
 
     <item
         android:id="@+id/filter_show_all"
-        android:title="@string/filter_show_all" />
+        android:title="@string/filter_show_all"
+        android:icon="@drawable/filter_icon"
+        app:showAsAction="withText"/>
     <item
         android:id="@+id/filter_show_urgent_recommendations"
         android:title="@string/filter_show_urgent_recommendations" />
