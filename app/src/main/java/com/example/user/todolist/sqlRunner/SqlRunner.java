@@ -1,7 +1,6 @@
 package com.example.user.todolist.sqlRunner;
 
 
-import android.app.DownloadManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -9,12 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.user.todolist.category.Category;
-import com.example.user.todolist.task.Task;
+import com.example.user.todolist.task.Recommendation;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class SqlRunner extends SQLiteOpenHelper {
 
@@ -55,17 +51,17 @@ public class SqlRunner extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean save (Task task){
+    public boolean save (Recommendation recommendation){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_TITLE, task.getTitle());
-        contentValues.put(COLUMN_DESCRIPTION, task.getDescription());
+        contentValues.put(COLUMN_TITLE, recommendation.getTitle());
+        contentValues.put(COLUMN_DESCRIPTION, recommendation.getDescription());
 
-        if (task.getDate() != null) {
-            contentValues.put(COLUMN_DATE, task.getDate());
+        if (recommendation.getDate() != null) {
+            contentValues.put(COLUMN_DATE, recommendation.getDate());
         }
-        if (task.getCategory() != null) {
-            contentValues.put(COLUMN_CATEGORY, task.getCategory().toString());
+        if (recommendation.getCategory() != null) {
+            contentValues.put(COLUMN_CATEGORY, recommendation.getCategory().toString());
         }
 
         long result = db.insert(TABLE_TASKS, null, contentValues);
@@ -73,62 +69,62 @@ public class SqlRunner extends SQLiteOpenHelper {
             return false;
         }
         else {
-            task.setId((int) (long) result);
+            recommendation.setId((int) (long) result);
             return true;
         }
     }
 
-    public ArrayList<Task> getAllTasks() {
-        ArrayList<Task> tasks = new ArrayList<>();
+    public ArrayList<Recommendation> getAllTasks() {
+        ArrayList<Recommendation> recommendations = new ArrayList<>();
         String selectQuery = "SELECT * FROM " + TABLE_TASKS;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
-                Task task = new Task();
-                task.setId(Integer.parseInt(cursor.getString(0)));
-                task.setTitle(cursor.getString(1));
-                task.setDescription(cursor.getString(2));
-                task.setDate(cursor.getString(3));
-                task.setCategory(Category.valueOf(cursor.getString(4)));
+                Recommendation recommendation = new Recommendation();
+                recommendation.setId(Integer.parseInt(cursor.getString(0)));
+                recommendation.setTitle(cursor.getString(1));
+                recommendation.setDescription(cursor.getString(2));
+                recommendation.setDate(cursor.getString(3));
+                recommendation.setCategory(Category.valueOf(cursor.getString(4)));
 
-                tasks.add(task);
+                recommendations.add(recommendation);
             } while (cursor.moveToNext());
         }
         // return contact list
-        return tasks;
+        return recommendations;
     }
 
-    public Task getTask(int id) {
+    public Recommendation getTask(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_TASKS, new String[] { COLUMN_ID, COLUMN_TITLE, COLUMN_DESCRIPTION, COLUMN_DATE, COLUMN_CATEGORY },
                 COLUMN_ID + "=?", new String[] { String.valueOf(id) },
                 null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
-        Task task = new Task(Integer.parseInt(cursor.getString(0)),
+        Recommendation recommendation = new Recommendation(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getString(2), cursor.getString(3), Category.valueOf(cursor.getString(4)));
-        // return task
-        return task;
+        // return recommendation
+        return recommendation;
     }
 
-    public int updateTask(Task task) {
+    public int updateTask(Recommendation recommendation) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_TITLE, task.getTitle());
-        values.put(COLUMN_DESCRIPTION, task.getDescription());
-        values.put(COLUMN_DATE, task.getDate());
-        values.put(COLUMN_CATEGORY, task.getCategory().toString());
+        values.put(COLUMN_TITLE, recommendation.getTitle());
+        values.put(COLUMN_DESCRIPTION, recommendation.getDescription());
+        values.put(COLUMN_DATE, recommendation.getDate());
+        values.put(COLUMN_CATEGORY, recommendation.getCategory().toString());
         // updating row
         return db.update(TABLE_TASKS, values, COLUMN_ID + " = ?",
-                new String[]{String.valueOf(task.getId())});
+                new String[]{String.valueOf(recommendation.getId())});
     }
 
 
-    public void deleteTask(Task task) {
+    public void deleteTask(Recommendation recommendation) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_TASKS, COLUMN_ID + " = ?",
-                new String[] { String.valueOf(task.getId()) });
+                new String[] { String.valueOf(recommendation.getId()) });
         db.close();
     }
 

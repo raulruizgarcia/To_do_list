@@ -15,13 +15,14 @@ import android.widget.ListView;
 import com.example.user.todolist.R;
 import com.example.user.todolist.category.Category;
 import com.example.user.todolist.sqlRunner.SqlRunner;
-import com.example.user.todolist.task.Task;
+import com.example.user.todolist.task.Recommendation;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class TasksActivity extends AppCompatActivity {
 
-    ArrayList<Task> tasks;
+    ArrayList<Recommendation> recommendations;
     ListView listView;
     SqlRunner sqlRunner;
     private boolean coding = false;
@@ -122,76 +123,76 @@ public class TasksActivity extends AppCompatActivity {
     }
 
     public void applyFilters(){
-        ArrayList<Task> origin = sqlRunner.getAllTasks();
-        ArrayList<Task> result = new ArrayList<>();
+        ArrayList<Recommendation> origin = sqlRunner.getAllTasks();
+        ArrayList<Recommendation> result = new ArrayList<>();
         if (checkFiltersAreApplied()) {
             if (coding) {
-                result.addAll(Task.returnTaskOfCategory(origin, Category.CODING));
+                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.CODING));
             }
             if (food) {
-                result.addAll(Task.returnTaskOfCategory(origin, Category.FOOD));
+                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.FOOD));
             }
             if (movies) {
-                result.addAll(Task.returnTaskOfCategory(origin, Category.MOVIES));
+                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.MOVIES));
             }
             if (books) {
-                result.addAll(Task.returnTaskOfCategory(origin, Category.BOOKS));
+                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.BOOKS));
             }
             if (gigs) {
-                result.addAll(Task.returnTaskOfCategory(origin, Category.GIGS));
+                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.GIGS));
             }
             if (music) {
-                result.addAll(Task.returnTaskOfCategory(origin, Category.MUSIC));
+                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.MUSIC));
             }
-            tasks = result;
-            RecommendationAdapter recommendationAdapter = new RecommendationAdapter(this, tasks);
+            recommendations = result;
+            RecommendationAdapter recommendationAdapter = new RecommendationAdapter(this, recommendations);
             listView.setAdapter(recommendationAdapter);
         }
     }
 
     public void generateTestArray(){
-        for (Task task: Task.returnTestArray()){
-            sqlRunner.save(task);
+        for (Recommendation recommendation : Recommendation.returnTestArray()){
+            sqlRunner.save(recommendation);
         }
         displayTasks();
     }
 
     public void displayUrgentTasks() {
-        ArrayList<Task> tasks = sqlRunner.getAllTasks();
-        ArrayList<Task> result = new ArrayList<>();
-        for (Task task: tasks){
-            if (task.daysLeft() <= 7 && task.daysLeft() > 0){
-                result.add(task);
+        ArrayList<Recommendation> recommendations = sqlRunner.getAllTasks();
+        ArrayList<Recommendation> result = new ArrayList<>();
+        for (Recommendation recommendation : recommendations){
+            if (recommendation.daysLeft() <= 7 && recommendation.daysLeft() > 0){
+                result.add(recommendation);
             }
         }
         TaskAdapter taskAdapter = new TaskAdapter(this, result);
         listView.setAdapter(taskAdapter);
     }
 
-    public void editTask(Task task){
+    public void editTask(Recommendation recommendation){
         Intent intent = new Intent(this, EditTaskActivity.class);
-        intent.putExtra("id", String.valueOf(task.getId()));
-        intent.putExtra("title", task.getTitle());
-        intent.putExtra("description", task.getDescription());
-        intent.putExtra("date", task.getDate());
-        intent.putExtra("category", task.getCategory().toString());
+        intent.putExtra("id", String.valueOf(recommendation.getId()));
+        intent.putExtra("title", recommendation.getTitle());
+        intent.putExtra("description", recommendation.getDescription());
+        intent.putExtra("date", recommendation.getDate());
+        intent.putExtra("category", recommendation.getCategory().toString());
         startActivity(intent);
     }
 
     public void displayTasks(){
         try {
-            tasks = sqlRunner.getAllTasks();
-            Collections.sort(tasks);
+            recommendations = sqlRunner.getAllTasks();
+            Collections.sort(recommendations);
         } catch (Exception e){
-            tasks = new ArrayList<>();
+            recommendations = new ArrayList<>();
         }
-        RecommendationAdapter recommendationAdapter = new RecommendationAdapter(this, tasks);
+        RecommendationAdapter recommendationAdapter = new RecommendationAdapter(this, recommendations);
         listView.setAdapter(recommendationAdapter);
 
     }
 
-    public void deleteTask(Task task) {
-        sqlRunner.deleteTask(task);
+    public void deleteTask(Recommendation recommendation) {
+        sqlRunner.deleteTask(recommendation);
         displayTasks();
         applyFilters();
     }
@@ -220,12 +221,12 @@ public class TasksActivity extends AppCompatActivity {
 
     public void onDeleteAllButtonPressed(final View floatingButton){
         AlertDialog alertbox = new AlertDialog.Builder(this)
-                .setMessage("Are you sure you want to delete all your tasks?")
+                .setMessage("Are you sure you want to delete all your recommendations?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
                         sqlRunner.deleteAllTasks();
-                        tasks = new ArrayList<>();
-                        TaskAdapter taskAdapter = new TaskAdapter(floatingButton.getContext(), tasks);
+                        recommendations = new ArrayList<>();
+                        TaskAdapter taskAdapter = new TaskAdapter(floatingButton.getContext(), recommendations);
                         listView.setAdapter(taskAdapter);
                         resetFilters();
                     }
@@ -240,8 +241,8 @@ public class TasksActivity extends AppCompatActivity {
 
     public void onTaskPressed(View view){
         View parentRow = (View) view.getParent();
-        Task task = (Task)parentRow.getTag();
-        editTask(task);
+        Recommendation recommendation = (Recommendation)parentRow.getTag();
+        editTask(recommendation);
     }
 
     public void onDeleteItemButtonPressed(final View view){
@@ -254,8 +255,8 @@ public class TasksActivity extends AppCompatActivity {
             @Override
             public void run() {
                 parentRow.setVisibility(View.GONE);
-                Task task = (Task) parentRow.getTag();
-                deleteTask(task);
+                Recommendation recommendation = (Recommendation) parentRow.getTag();
+                deleteTask(recommendation);
             }
         }, 1000);
 

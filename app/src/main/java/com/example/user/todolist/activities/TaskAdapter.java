@@ -8,12 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.example.user.todolist.R;
 import com.example.user.todolist.category.Category;
-import com.example.user.todolist.task.Task;
+import com.example.user.todolist.task.Recommendation;
 
 import java.util.ArrayList;
 
 
-public class TaskAdapter extends ArrayAdapter<Task> {
+public class TaskAdapter extends ArrayAdapter<Recommendation> {
 
     public TaskAdapter(Context context, ArrayList tasks){
         super(context, 0, tasks);
@@ -25,18 +25,18 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         if (taskItem == null){
             taskItem = LayoutInflater.from(getContext()).inflate(R.layout.activity_list_view, parent, false);
         }
-        Task currentTask = getItem(position);
+        Recommendation currentRecommendation = getItem(position);
 
         TextView daysLeft = (TextView) taskItem.findViewById(R.id.daysLeftView);
-        daysLeft.setText(String.valueOf(currentTask.daysLeft()));
+        daysLeft.setText(String.valueOf(currentRecommendation.daysLeft()));
 
         TextView title = (TextView) taskItem.findViewById(R.id.titleListView);
-        title.setText(currentTask.getTitle());
+        title.setText(currentRecommendation.getTitle());
 
         TextView category = (TextView) taskItem.findViewById(R.id.categoryListView);
-        category.setText(capitalizeCategory(currentTask.getCategory()));
+        category.setText(capitalizeCategory(currentRecommendation.getCategory()));
 
-        taskItem.setTag(currentTask);
+        taskItem.setTag(currentRecommendation);
         return taskItem;
     }
 

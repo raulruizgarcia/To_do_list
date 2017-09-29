@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.example.user.todolist.R;
 import com.example.user.todolist.category.Category;
 import com.example.user.todolist.sqlRunner.SqlRunner;
-import com.example.user.todolist.task.Task;
+import com.example.user.todolist.task.Recommendation;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -126,8 +126,8 @@ public class EditTaskActivity extends AppCompatActivity {
             String description = descriptionTextEdit.getText().toString();
             String date = dateEditText.getText().toString();
             String category = addUnderscoreAndUpperCase(category_spinner.getSelectedItem().toString());
-            Task task = new Task(title, description, date, Category.valueOf(category));
-            sqlRunner.save(task);
+            Recommendation recommendation = new Recommendation(title, description, date, Category.valueOf(category));
+            sqlRunner.save(recommendation);
             Intent intent = new Intent(this, TasksActivity.class);
             startActivity(intent);
         }
@@ -168,8 +168,8 @@ public class EditTaskActivity extends AppCompatActivity {
         String date = dateEditText.getText().toString();
         Category category = Category.valueOf(addUnderscoreAndUpperCase(category_spinner.getSelectedItem().toString()));
 
-        Task taskToUpdate = new Task(id, title, description, date, category);
-        sqlRunner.updateTask(taskToUpdate);
+        Recommendation recommendationToUpdate = new Recommendation(id, title, description, date, category);
+        sqlRunner.updateTask(recommendationToUpdate);
 
         Intent goBackToHomePage = new Intent(this, TasksActivity.class);
         startActivity(goBackToHomePage);

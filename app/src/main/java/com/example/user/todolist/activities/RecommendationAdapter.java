@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.user.todolist.R;
 import com.example.user.todolist.category.Category;
-import com.example.user.todolist.task.Task;
+import com.example.user.todolist.task.Recommendation;
 
 import java.util.ArrayList;
 
@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Created by user on 26/09/2017.
  */
 
-public class RecommendationAdapter extends ArrayAdapter<Task> {
+public class RecommendationAdapter extends ArrayAdapter<Recommendation> {
 
     public RecommendationAdapter (Context context, ArrayList tasks){
         super(context, 0, tasks);
@@ -29,15 +29,15 @@ public class RecommendationAdapter extends ArrayAdapter<Task> {
         if (taskItem == null){
             taskItem = LayoutInflater.from(getContext()).inflate(R.layout.activity_recommendations_list_view, parent, false);
         }
-        Task currentTask = getItem(position);
+        Recommendation currentRecommendation = getItem(position);
 
         TextView category = (TextView) taskItem.findViewById(R.id.categoryListView);
-        category.setText(capitalizeCategory(currentTask.getCategory()));
+        category.setText(capitalizeCategory(currentRecommendation.getCategory()));
 
         TextView title = (TextView) taskItem.findViewById(R.id.titleListView);
-        title.setText(currentTask.getTitle());
+        title.setText(currentRecommendation.getTitle());
 
-        taskItem.setTag(currentTask);
+        taskItem.setTag(currentRecommendation);
         return taskItem;
     }
 

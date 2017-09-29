@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 
-public class Task implements Comparable<Task> {
+public class Recommendation implements Comparable<Recommendation> {
 
     private int id;
     private String title;
@@ -17,11 +17,11 @@ public class Task implements Comparable<Task> {
     private String date;
     private Category category;
 
-    public Task() {
+    public Recommendation() {
 
     }
 
-    public Task(String title, String description, String date, Category category) {
+    public Recommendation(String title, String description, String date, Category category) {
         this.title = title;
         this.description = description;
         this.date = date;
@@ -29,7 +29,7 @@ public class Task implements Comparable<Task> {
     }
 
 
-    public Task(int id, String title, String description, String date, Category category) {
+    public Recommendation(int id, String title, String description, String date, Category category) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -93,9 +93,9 @@ public class Task implements Comparable<Task> {
     }
 
     @Override
-    public int compareTo(Task otherTask) {
+    public int compareTo(Recommendation otherRecommendation) {
         int myTime = (int) this.daysLeft();
-        int otherTaskTime = (int) otherTask.daysLeft();
+        int otherTaskTime = (int) otherRecommendation.daysLeft();
         int difference = myTime - otherTaskTime;
         if (difference == 0) {
             return 0;
@@ -106,32 +106,32 @@ public class Task implements Comparable<Task> {
         }
     }
 
-    public static ArrayList<Task> returnTestArray(){
-        ArrayList<Task> result = new ArrayList<>();
-        Task task1 = new Task("It, a novel", "", "", Category.BOOKS);
-        Task task2 = new Task("The handmaid's tale", "", "", Category.BOOKS);
-        Task task3 = new Task("Queens of Stone Age: Villains", "", "", Category.MUSIC);
-        Task task4 = new Task("Buy Tickets for Kasabian", "", "2-10-2017", Category.GIGS);
-        Task task8 = new Task("Learn Android Studio", "", "", Category.CODING);
-        Task task5 = new Task("Learn C#", "", "", Category.CODING);
-        Task task6 = new Task("Cameo Cinema", "", "", Category.MOVIES);
-        Task task7 = new Task("Ramen", "", "", Category.FOOD);
-        result.add(task1);
-        result.add(task2);
-        result.add(task3);
-        result.add(task4);
-        result.add(task5);
-        result.add(task6);
-        result.add(task7);
-        result.add(task8);
+    public static ArrayList<Recommendation> returnTestArray(){
+        ArrayList<Recommendation> result = new ArrayList<>();
+        Recommendation recommendation1 = new Recommendation("It, a novel", "", "", Category.BOOKS);
+        Recommendation recommendation2 = new Recommendation("The handmaid's tale", "", "", Category.BOOKS);
+        Recommendation recommendation3 = new Recommendation("Queens of Stone Age: Villains", "", "", Category.MUSIC);
+        Recommendation recommendation4 = new Recommendation("Buy Tickets for Kasabian", "", "2-10-2017", Category.GIGS);
+        Recommendation recommendation8 = new Recommendation("Learn Android Studio", "", "", Category.CODING);
+        Recommendation recommendation5 = new Recommendation("Learn C#", "", "", Category.CODING);
+        Recommendation recommendation6 = new Recommendation("Cameo Cinema", "", "", Category.MOVIES);
+        Recommendation recommendation7 = new Recommendation("Ramen", "", "", Category.FOOD);
+        result.add(recommendation1);
+        result.add(recommendation2);
+        result.add(recommendation3);
+        result.add(recommendation4);
+        result.add(recommendation5);
+        result.add(recommendation6);
+        result.add(recommendation7);
+        result.add(recommendation8);
         return result;
     }
 
-    public static ArrayList<Task> returnTaskOfCategory (ArrayList<Task> arrayList, Category category){
-        ArrayList<Task> resultArray = new ArrayList<>();
-        for (Task task: arrayList){
-            if (task.getCategory().equals(category)){
-                resultArray.add(task);
+    public static ArrayList<Recommendation> returnTaskOfCategory (ArrayList<Recommendation> arrayList, Category category){
+        ArrayList<Recommendation> resultArray = new ArrayList<>();
+        for (Recommendation recommendation : arrayList){
+            if (recommendation.getCategory().equals(category)){
+                resultArray.add(recommendation);
             }
         }
         return resultArray;

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Check it App!</string>
     <string name="title_activity_tasks">TasksActivity</string>
-    <string name="edit_activity_label">Edit or add a new task</string>
+    <string name="edit_activity_label">Edit or add a new recommendation</string>
     <string name="task_title_label">Recommendation</string>
     <string name="task_title_hint">Recommendation</string>
     <string name="task_description_label">Additional info</string>
