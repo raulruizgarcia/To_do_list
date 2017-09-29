@@ -37,7 +37,7 @@ public class SqlRunner extends SQLiteOpenHelper {
                 + RECOMMENDATIONS_COLUMN_DATE + " TEXT,"
                 + RECOMMENDATIONS_COLUMN_CATEGORY_ID + " INTEGER NOT NULL, "
                 + "FOREIGN KEY(" + RECOMMENDATIONS_COLUMN_CATEGORY_ID + ") REFERENCES "
-                + TABLE_CATEGORIES + " ("
+                + TABLE_CATEGORIES + " (" + CATEGORIES_COLUMN_ID
                 + ")";
 
         String CREATE_CATEGORIES_TABLE = "CREATE TABLE " + TABLE_CATEGORIES + "("

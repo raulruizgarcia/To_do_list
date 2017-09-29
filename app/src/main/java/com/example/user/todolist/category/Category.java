@@ -98,6 +98,21 @@ public class Category {
         return category;
     }
 
+    public static Category getCategoryByTitle(String title){
+        SQLiteDatabase db = Category.sqlRunner.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_CATEGORIES, new String[] {CATEGORIES_COLUMN_ID, CATEGORIES_COLUMN_TITLE},
+                CATEGORIES_COLUMN_TITLE + "=?", new String[] { title},
+                null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+        Category category = new Category(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1));
+        // return recommendation
+        return category;
+
+    }
+
+
     public int updateCategory() {
         SQLiteDatabase db = Category.sqlRunner.getReadableDatabase();
         ContentValues values = new ContentValues();
