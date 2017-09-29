@@ -47,7 +47,6 @@ public class RecommendationsActivity extends AppCompatActivity {
         sqlRunner = new SqlRunner(this);
         Category.sqlRunner = new SqlRunner(this);
         Recommendation.sqlRunner = new SqlRunner(this);
-        Log.d("test recommendations", Recommendation.getRecommendation(1).getTitle());
         Log.d("test categories", Category.getCategory(1).getTitle());
         displayTasks();
     }

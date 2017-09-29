@@ -122,8 +122,9 @@ public class EditTaskActivity extends AppCompatActivity {
             String title = titleTextEdit.getText().toString();
             String description = descriptionTextEdit.getText().toString();
             String date = dateEditText.getText().toString();
-//            String category = (category_spinner.getSelectedItem().toString());
-            Recommendation recommendation = new Recommendation(title, description, date, 1);
+            String categoryString = (category_spinner.getSelectedItem().toString());
+            int categoryId = Category.getCategoryByTitle(categoryString).getId();
+            Recommendation recommendation = new Recommendation(title, description, date, categoryId);
             recommendation.save();
             Intent intent = new Intent(this, RecommendationsActivity.class);
             startActivity(intent);
