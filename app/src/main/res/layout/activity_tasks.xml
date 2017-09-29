@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/holo_blue_light"
-    tools:context="com.example.user.todolist.activities.TasksActivity">
+    tools:context="com.example.user.todolist.activities.RecommendationsActivity">
 
 
     <android.support.design.widget.FloatingActionButton

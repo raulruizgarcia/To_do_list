@@ -13,14 +13,13 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ListView;
 import com.example.user.todolist.R;
-import com.example.user.todolist.category.Category;
 import com.example.user.todolist.sqlRunner.SqlRunner;
 import com.example.user.todolist.recommendations.Recommendation;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class TasksActivity extends AppCompatActivity {
+public class RecommendationsActivity extends AppCompatActivity {
 
     ArrayList<Recommendation> recommendations;
     ListView listView;
@@ -78,32 +77,32 @@ public class TasksActivity extends AppCompatActivity {
             case R.id.filter_food:
                 food = !item.isChecked();
                 item.setChecked(food);
-                applyFilters();
+//                applyFilters();
                 break;
             case R.id.filter_coding:
                 coding = !item.isChecked();
                 item.setChecked(coding);
-                applyFilters();
+//                applyFilters();
                 break;
             case R.id.filter_movies:
                 movies = !item.isChecked();
                 item.setChecked(movies);
-                applyFilters();
+//                applyFilters();
                 break;
             case R.id.filter_books:
                 books = !item.isChecked();
                 item.setChecked(books);
-                applyFilters();
+//                applyFilters();
                 break;
             case R.id.filter_gigs:
                 gigs = !item.isChecked();
                 item.setChecked(gigs);
-                applyFilters();
+//                applyFilters();
                 break;
             case R.id.filter_music:
                 music = !item.isChecked();
                 item.setChecked(music);
-                applyFilters();
+//                applyFilters();
                 break;
             default:
                 return false;
@@ -120,43 +119,43 @@ public class TasksActivity extends AppCompatActivity {
         }
     }
 
-    public void applyFilters(){
-        ArrayList<Recommendation> origin = sqlRunner.getAllTasks();
-        ArrayList<Recommendation> result = new ArrayList<>();
-        if (checkFiltersAreApplied()) {
-            if (coding) {
-                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.CODING));
-            }
-            if (food) {
-                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.FOOD));
-            }
-            if (movies) {
-                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.MOVIES));
-            }
-            if (books) {
-                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.BOOKS));
-            }
-            if (gigs) {
-                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.GIGS));
-            }
-            if (music) {
-                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.MUSIC));
-            }
-            recommendations = result;
-            RecommendationAdapter recommendationAdapter = new RecommendationAdapter(this, recommendations);
-            listView.setAdapter(recommendationAdapter);
-        }
-    }
+//    public void applyFilters(){
+//        ArrayList<Recommendation> origin = sqlRunner.getAllTasks();
+//        ArrayList<Recommendation> result = new ArrayList<>();
+//        if (checkFiltersAreApplied()) {
+//            if (coding) {
+//                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.CODING));
+//            }
+//            if (food) {
+//                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.FOOD));
+//            }
+//            if (movies) {
+//                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.MOVIES));
+//            }
+//            if (books) {
+//                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.BOOKS));
+//            }
+//            if (gigs) {
+//                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.GIGS));
+//            }
+//            if (music) {
+//                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.MUSIC));
+//            }
+//            recommendations = result;
+//            RecommendationAdapter recommendationAdapter = new RecommendationAdapter(this, recommendations);
+//            listView.setAdapter(recommendationAdapter);
+//        }
+//    }
 
     public void generateTestArray(){
         for (Recommendation recommendation : Recommendation.returnTestArray()){
-            sqlRunner.save(recommendation);
+             recommendation.save();
         }
         displayTasks();
     }
 
     public void displayUrgentTasks() {
-        ArrayList<Recommendation> recommendations = sqlRunner.getAllTasks();
+        ArrayList<Recommendation> recommendations = Recommendation.getAllRecommendations();
         ArrayList<Recommendation> result = new ArrayList<>();
         for (Recommendation recommendation : recommendations){
             if (recommendation.daysLeft() <= 7 && recommendation.daysLeft() > 0){
@@ -173,13 +172,13 @@ public class TasksActivity extends AppCompatActivity {
         intent.putExtra("title", recommendation.getTitle());
         intent.putExtra("description", recommendation.getDescription());
         intent.putExtra("date", recommendation.getDate());
-        intent.putExtra("category", recommendation.getCategory().toString());
+        intent.putExtra("category_id", recommendation.getCategoryId());
         startActivity(intent);
     }
 
     public void displayTasks(){
         try {
-            recommendations = sqlRunner.getAllTasks();
+            recommendations = Recommendation.getAllRecommendations();
             Collections.sort(recommendations);
         } catch (Exception e){
             recommendations = new ArrayList<>();
@@ -189,10 +188,10 @@ public class TasksActivity extends AppCompatActivity {
 
     }
 
-    public void deleteTask(Recommendation recommendation) {
-        sqlRunner.deleteTask(recommendation);
+    public void deleteRecommendation(Recommendation recommendation) {
+        recommendation.delete();
         displayTasks();
-        applyFilters();
+//        applyFilters();
     }
 
     @Override
@@ -222,7 +221,7 @@ public class TasksActivity extends AppCompatActivity {
                 .setMessage("Are you sure you want to delete all your recommendations?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-                        sqlRunner.deleteAllTasks();
+                        Recommendation.deleteAll();
                         recommendations = new ArrayList<>();
                         RecommendationDateAdapter recommendationDateAdapter = new RecommendationDateAdapter(floatingButton.getContext(), recommendations);
                         listView.setAdapter(recommendationDateAdapter);
@@ -254,7 +253,7 @@ public class TasksActivity extends AppCompatActivity {
             public void run() {
                 parentRow.setVisibility(View.GONE);
                 Recommendation recommendation = (Recommendation) parentRow.getTag();
-                deleteTask(recommendation);
+                deleteRecommendation(recommendation);
             }
         }, 1000);
 

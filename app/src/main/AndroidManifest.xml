@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activities.TasksActivity">
+        <activity android:name=".activities.RecommendationsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,7 @@
 
         <activity
             android:name=".activities.EditTaskActivity"
-            android:parentActivityName=".activities.TasksActivity"
+            android:parentActivityName=".activities.RecommendationsActivity"
             android:label="@string/edit_activity_label">
 
         </activity>

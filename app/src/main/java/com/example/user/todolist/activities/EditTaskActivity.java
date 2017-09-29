@@ -79,29 +79,26 @@ public class EditTaskActivity extends AppCompatActivity {
         titleTextEdit.setText(intent.getStringExtra("title"));
         descriptionTextEdit.setText(intent.getStringExtra("description"));
         dateEditText.setText(intent.getStringExtra("date"));
-        int categoryPosition = Category.valueOf(intent.getStringExtra("category")).ordinal();
-        category_spinner.setSelection(categoryPosition);
+//        int categoryPosition = Category.valueOf(intent.getStringExtra("category")).ordinal();
+//        category_spinner.setSelection(categoryPosition);
     }
 
     public boolean bundleHasContents(){
         return getIntent().hasExtra("id");
     }
 
-    public String removeUnderscore(String string){
-        return string.replace("_", " ");
-    }
+//    public String removeUnderscore(String string){
+//        return string.replace("_", " ");
+//    }
 
-    public String addUnderscoreAndUpperCase(String string){
-        return string.replace(" ", "_").toUpperCase();
-    }
+//    public String addUnderscoreAndUpperCase(String string){
+//        return string.replace(" ", "_").toUpperCase();
+//    }
 
     public void populateCategorySpinner(){
         categories = new ArrayList<>();
-        for (Category category: Category.values()){
-            String inputString = removeUnderscore(category.toString());
-            StringBuilder categoryCapitalized = new StringBuilder(inputString.toLowerCase());
-            categoryCapitalized.setCharAt(0, Character.toUpperCase(categoryCapitalized.charAt(0)));
-            categories.add(categoryCapitalized.toString());
+        for (Category category: Category.getAllCategories()){
+            categories.add(category.getTitle());
         }
 
         categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,categories);
@@ -125,10 +122,10 @@ public class EditTaskActivity extends AppCompatActivity {
             String title = titleTextEdit.getText().toString();
             String description = descriptionTextEdit.getText().toString();
             String date = dateEditText.getText().toString();
-            String category = addUnderscoreAndUpperCase(category_spinner.getSelectedItem().toString());
-            Recommendation recommendation = new Recommendation(title, description, date, Category.valueOf(category));
-            sqlRunner.save(recommendation);
-            Intent intent = new Intent(this, TasksActivity.class);
+            String category = (category_spinner.getSelectedItem().toString());
+            Recommendation recommendation = new Recommendation(title, description, date, Category.getCategoryByTitle(category).getId());
+            recommendation.save();
+            Intent intent = new Intent(this, RecommendationsActivity.class);
             startActivity(intent);
         }
     }
@@ -166,12 +163,12 @@ public class EditTaskActivity extends AppCompatActivity {
         String title = titleTextEdit.getText().toString();
         String description = descriptionTextEdit.getText().toString();
         String date = dateEditText.getText().toString();
-        Category category = Category.valueOf(addUnderscoreAndUpperCase(category_spinner.getSelectedItem().toString()));
+        Category category = Category.getCategoryByTitle((category_spinner.getSelectedItem().toString()));
 
-        Recommendation recommendationToUpdate = new Recommendation(id, title, description, date, category);
-        sqlRunner.updateTask(recommendationToUpdate);
+        Recommendation recommendationToUpdate = new Recommendation(id, title, description, date, category.getId());
+        recommendationToUpdate.update();
 
-        Intent goBackToHomePage = new Intent(this, TasksActivity.class);
+        Intent goBackToHomePage = new Intent(this, RecommendationsActivity.class);
         startActivity(goBackToHomePage);
     }
 

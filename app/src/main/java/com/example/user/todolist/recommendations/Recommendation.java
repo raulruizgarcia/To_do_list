@@ -125,26 +125,26 @@ public class Recommendation implements Comparable<Recommendation> {
         }
     }
 
-//    public static ArrayList<Recommendation> returnTestArray(){
-//        ArrayList<Recommendation> result = new ArrayList<>();
-//        Recommendation recommendation1 = new Recommendation("It, a novel", "", "", Category.BOOKS);
-//        Recommendation recommendation2 = new Recommendation("The handmaid's tale", "", "", Category.BOOKS);
-//        Recommendation recommendation3 = new Recommendation("Queens of Stone Age: Villains", "", "", Category.MUSIC);
-//        Recommendation recommendation4 = new Recommendation("Buy Tickets for Kasabian", "", "2-10-2017", Category.GIGS);
-//        Recommendation recommendation8 = new Recommendation("Learn Android Studio", "", "", Category.CODING);
-//        Recommendation recommendation5 = new Recommendation("Learn C#", "", "", Category.CODING);
-//        Recommendation recommendation6 = new Recommendation("Cameo Cinema", "", "", Category.MOVIES);
-//        Recommendation recommendation7 = new Recommendation("Ramen", "", "", Category.FOOD);
-//        result.add(recommendation1);
-//        result.add(recommendation2);
-//        result.add(recommendation3);
-//        result.add(recommendation4);
-//        result.add(recommendation5);
-//        result.add(recommendation6);
-//        result.add(recommendation7);
-//        result.add(recommendation8);
-//        return result;
-//    }
+    public static ArrayList<Recommendation> returnTestArray(){
+        ArrayList<Recommendation> result = new ArrayList<>();
+        Recommendation recommendation1 = new Recommendation("It, a novel", "", "", 1);
+        Recommendation recommendation2 = new Recommendation("The handmaid's tale", "", "", 1);
+        Recommendation recommendation3 = new Recommendation("Queens of Stone Age: Villains", "", "", 1);
+        Recommendation recommendation4 = new Recommendation("Buy Tickets for Kasabian", "", "2-10-2017", 1);
+        Recommendation recommendation8 = new Recommendation("Learn Android Studio", "", "", 1);
+        Recommendation recommendation5 = new Recommendation("Learn C#", "", "", 1);
+        Recommendation recommendation6 = new Recommendation("Cameo Cinema", "", "", 1);
+        Recommendation recommendation7 = new Recommendation("Ramen", "", "", 1);
+        result.add(recommendation1);
+        result.add(recommendation2);
+        result.add(recommendation3);
+        result.add(recommendation4);
+        result.add(recommendation5);
+        result.add(recommendation6);
+        result.add(recommendation7);
+        result.add(recommendation8);
+        return result;
+    }
 
 //    public static ArrayList<Recommendation> returnTaskOfCategory (ArrayList<Recommendation> arrayList, Category category){
 //        ArrayList<Recommendation> resultArray = new ArrayList<>();
@@ -214,7 +214,7 @@ public class Recommendation implements Comparable<Recommendation> {
         return recommendation;
     }
 
-    public int updateRecommendation() {
+    public int update() {
         SQLiteDatabase db = Recommendation.sqlRunner.getReadableDatabase();
         ContentValues values = new ContentValues();
         values.put(RECOMMENDATIONS_COLUMN_TITLE, this.getTitle());
@@ -227,14 +227,14 @@ public class Recommendation implements Comparable<Recommendation> {
     }
 
 
-    public void deleteRecommendation(Recommendation recommendation) {
+    public void delete() {
         SQLiteDatabase db = Recommendation.sqlRunner.getWritableDatabase();
         db.delete(TABLE_RECOMMENDATIONS, RECOMMENDATIONS_COLUMN_ID + " = ?",
-                new String[] { String.valueOf(recommendation.getId()) });
+                new String[] { String.valueOf(this.id) });
         db.close();
     }
 
-    public void deleteAllTasks(){
+    public static void  deleteAll(){
         SQLiteDatabase db = Recommendation.sqlRunner.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_RECOMMENDATIONS);
     }
