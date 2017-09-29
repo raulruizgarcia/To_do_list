@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Category {
     int id;
     String title;
-    private static SqlRunner sqlRunner;
+    public static SqlRunner sqlRunner;
 
     private static final String TABLE_CATEGORIES = "categories";
     // Categories Table Columns names

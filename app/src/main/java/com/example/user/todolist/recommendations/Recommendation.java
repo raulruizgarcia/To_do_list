@@ -22,7 +22,7 @@ public class Recommendation implements Comparable<Recommendation> {
     private String description;
     private String date;
     private int categoryId;
-    private static SqlRunner sqlRunner;
+    public static SqlRunner sqlRunner;
 
 
     // Recommendations Table Name
@@ -32,7 +32,7 @@ public class Recommendation implements Comparable<Recommendation> {
     private static final String RECOMMENDATIONS_COLUMN_TITLE = "title";
     private static final String RECOMMENDATIONS_COLUMN_DESCRIPTION = "description";
     private static final String RECOMMENDATIONS_COLUMN_DATE = "date";
-    private static final String RECOMMENDATIONS_COLUMN_CATEGORY_ID = "categoryId";
+    private static final String RECOMMENDATIONS_COLUMN_CATEGORY_ID = "category_id";
     // Categories Table Columns names
     private static final String CATEGORIES_COLUMN_ID = "id";
     private static final String CATEGORIES_COLUMN_TITLE = "title";

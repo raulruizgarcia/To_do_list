@@ -13,6 +13,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ListView;
 import com.example.user.todolist.R;
+import com.example.user.todolist.category.Category;
 import com.example.user.todolist.sqlRunner.SqlRunner;
 import com.example.user.todolist.recommendations.Recommendation;
 
@@ -43,6 +44,8 @@ public class RecommendationsActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listView);
         sqlRunner = new SqlRunner(this);
+        Category.sqlRunner = new SqlRunner(this);
+        Recommendation.sqlRunner = new SqlRunner(this);
         displayTasks();
     }
 
