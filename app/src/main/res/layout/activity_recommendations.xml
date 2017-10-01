@@ -9,15 +9,6 @@
     tools:context="com.example.user.todolist.activities.RecommendationsActivity">
 
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/secondaryLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        tools:layout_editor_absoluteX="107dp"
-        tools:layout_editor_absoluteY="107dp">
-
-    </android.support.constraint.ConstraintLayout>
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/deleteAllFloatingButton"
         android:layout_width="wrap_content"
