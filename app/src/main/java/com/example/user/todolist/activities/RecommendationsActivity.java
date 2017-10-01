@@ -11,15 +11,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.user.todolist.R;
 import com.example.user.todolist.category.Category;
 import com.example.user.todolist.sqlRunner.SqlRunner;
 import com.example.user.todolist.recommendations.Recommendation;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -47,7 +50,24 @@ public class RecommendationsActivity extends AppCompatActivity {
         Recommendation.sqlRunner = new SqlRunner(this);
         filterByCategorySpinner = (Spinner) findViewById(R.id.filterByCategorySpinner);
         populateFilterByCategorySpinner();
-        displayTasks();
+        displayRecommendations();
+
+        filterByCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (position > 0){
+                    Toast.makeText(parentView.getContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
+                    Toast.makeText(parentView.getContext(), categories.get(position), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(parentView.getContext(), "See all the recommendations", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
+
+        });
     }
 
     @Override
@@ -59,7 +79,7 @@ public class RecommendationsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.filter_show_all:
-                displayTasks();
+                displayRecommendations();
                 break;
             case R.id.filter_show_urgent_recommendations:
                 displayUrgentTasks();
@@ -67,18 +87,36 @@ public class RecommendationsActivity extends AppCompatActivity {
             case R.id.generate_test_array:
                 generateTestArray();
                 break;
+            case R.id.manage_categories:
+                Intent intent = new Intent(this, ManageCategoriesActivity.class);
+                startActivity(intent);
             default:
                 return false;
         }
         return true;
     }
 
+    public void filterRecommendationsByCategory(int categoryIndex){
+        ArrayList<Recommendation> result = new ArrayList<>();
+        Category categoryToFilter = Category.getCategoryByTitle(categories.get(categoryIndex));
+        int categoryId = categoryToFilter.getId();
+
+        for (Recommendation recommendation: Recommendation.getAllRecommendations()){
+            if (recommendation.getCategoryId() == categoryId){
+                result.add(recommendation);
+            }
+        }
+        recommendations = result;
+        RecommendationAdapter recommendationAdapter = new RecommendationAdapter(this, recommendations);
+        listView.setAdapter(recommendationAdapter);
+
+    }
 
     public void generateTestArray(){
         for (Recommendation recommendation : Recommendation.returnTestArray()){
              recommendation.save();
         }
-        displayTasks();
+        displayRecommendations();
     }
 
     public void displayUrgentTasks() {
@@ -103,7 +141,7 @@ public class RecommendationsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void displayTasks(){
+    public void displayRecommendations(){
         try {
             recommendations = Recommendation.getAllRecommendations();
             Collections.sort(recommendations);
@@ -117,7 +155,7 @@ public class RecommendationsActivity extends AppCompatActivity {
 
     public void deleteRecommendation(Recommendation recommendation) {
         recommendation.delete();
-        displayTasks();
+        displayRecommendations();
     }
 
 
@@ -176,6 +214,7 @@ public class RecommendationsActivity extends AppCompatActivity {
 
     public void populateFilterByCategorySpinner(){
         categories = new ArrayList<>();
+        categories.add("See all recommendations");
         for (Category category: Category.getAllCategories()){
             categories.add(category.getTitle());
         }

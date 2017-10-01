@@ -15,5 +15,9 @@
         android:id="@+id/generate_test_array"
         android:title="@string/generate_test_array"
          />
+    <item
+        android:id="@+id/manage_categories"
+        android:title="@string/manage_categories_text"
+         />
 
 </menu>
