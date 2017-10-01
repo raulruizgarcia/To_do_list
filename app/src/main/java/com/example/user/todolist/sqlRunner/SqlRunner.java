@@ -38,13 +38,13 @@ public class SqlRunner extends SQLiteOpenHelper {
                 + RECOMMENDATIONS_COLUMN_CATEGORY_ID + " INTEGER NOT NULL, "
                 + "FOREIGN KEY(" + RECOMMENDATIONS_COLUMN_CATEGORY_ID + ") REFERENCES "
                 + TABLE_CATEGORIES + " (" + CATEGORIES_COLUMN_ID
-                + ")";
+                + "))";
 
         String CREATE_CATEGORIES_TABLE = "CREATE TABLE " + TABLE_CATEGORIES + "("
                 + CATEGORIES_COLUMN_ID + " INTEGER PRIMARY KEY,"
                 + CATEGORIES_COLUMN_TITLE+ " TEXT,"
                 + "CONSTRAINT title_unique UNIQUE (" + CATEGORIES_COLUMN_TITLE
-                + ")";
+                + "))";
 
         db.execSQL(CREATE_RECOMMENDATIONS_TABLE);
         db.execSQL(CREATE_CATEGORIES_TABLE);
