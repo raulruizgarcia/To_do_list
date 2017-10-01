@@ -5,14 +5,16 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
+
 import com.example.user.todolist.R;
 import com.example.user.todolist.category.Category;
 import com.example.user.todolist.sqlRunner.SqlRunner;
@@ -26,12 +28,9 @@ public class RecommendationsActivity extends AppCompatActivity {
     ArrayList<Recommendation> recommendations;
     ListView listView;
     SqlRunner sqlRunner;
-    private boolean coding = false;
-    private boolean movies = false;
-    private boolean food = false;
-    private boolean books = false;
-    private boolean gigs = false;
-    private boolean music = false;
+    private Spinner filterByCategorySpinner;
+    private ArrayList<String> categories;
+
 
 
     @Override
@@ -41,35 +40,25 @@ public class RecommendationsActivity extends AppCompatActivity {
     }
 
     private void loadActivity(){
-        setContentView(R.layout.activity_tasks);
-
+        setContentView(R.layout.activity_recommendations);
         listView = (ListView) findViewById(R.id.listView);
         sqlRunner = new SqlRunner(this);
         Category.sqlRunner = new SqlRunner(this);
         Recommendation.sqlRunner = new SqlRunner(this);
+        filterByCategorySpinner = (Spinner) findViewById(R.id.filterByCategorySpinner);
+        populateFilterByCategorySpinner();
         displayTasks();
     }
 
     @Override
     protected void onResume(){
-        resetFilters();
         super.onResume();
-    }
-
-    public void resetFilters(){
-        coding = false;
-        movies = false;
-        food = false;
-        books = false;
-        gigs = false;
-        music = false;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.filter_show_all:
-                resetFilters();
                 displayTasks();
                 break;
             case R.id.filter_show_urgent_recommendations:
@@ -78,78 +67,12 @@ public class RecommendationsActivity extends AppCompatActivity {
             case R.id.generate_test_array:
                 generateTestArray();
                 break;
-            case R.id.filter_food:
-                food = !item.isChecked();
-                item.setChecked(food);
-//                applyFilters();
-                break;
-            case R.id.filter_coding:
-                coding = !item.isChecked();
-                item.setChecked(coding);
-//                applyFilters();
-                break;
-            case R.id.filter_movies:
-                movies = !item.isChecked();
-                item.setChecked(movies);
-//                applyFilters();
-                break;
-            case R.id.filter_books:
-                books = !item.isChecked();
-                item.setChecked(books);
-//                applyFilters();
-                break;
-            case R.id.filter_gigs:
-                gigs = !item.isChecked();
-                item.setChecked(gigs);
-//                applyFilters();
-                break;
-            case R.id.filter_music:
-                music = !item.isChecked();
-                item.setChecked(music);
-//                applyFilters();
-                break;
             default:
                 return false;
         }
         return true;
     }
 
-    public boolean checkFiltersAreApplied(){
-        if (coding || movies || food || books || gigs || music){
-            return true;
-        } else {
-            displayTasks();
-            return false;
-        }
-    }
-
-//    public void applyFilters(){
-//        ArrayList<Recommendation> origin = sqlRunner.getAllTasks();
-//        ArrayList<Recommendation> result = new ArrayList<>();
-//        if (checkFiltersAreApplied()) {
-//            if (coding) {
-//                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.CODING));
-//            }
-//            if (food) {
-//                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.FOOD));
-//            }
-//            if (movies) {
-//                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.MOVIES));
-//            }
-//            if (books) {
-//                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.BOOKS));
-//            }
-//            if (gigs) {
-//                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.GIGS));
-//            }
-//            if (music) {
-//                result.addAll(Recommendation.returnTaskOfCategory(origin, Category.MUSIC));
-//            }
-//            recommendations = result;
-//            RecommendationAdapter recommendationAdapter = new RecommendationAdapter(this, recommendations);
-//            listView.setAdapter(recommendationAdapter);
-//        }
-//    }
 
     public void generateTestArray(){
         for (Recommendation recommendation : Recommendation.returnTestArray()){
@@ -195,25 +118,8 @@ public class RecommendationsActivity extends AppCompatActivity {
     public void deleteRecommendation(Recommendation recommendation) {
         recommendation.delete();
         displayTasks();
-//        applyFilters();
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem checkable = menu.findItem(R.id.filter_food);
-        checkable.setChecked(food);
-        checkable = menu.findItem(R.id.filter_books);
-        checkable.setChecked(books);
-        checkable = menu.findItem(R.id.filter_coding);
-        checkable.setChecked(coding);
-        checkable = menu.findItem(R.id.filter_movies);
-        checkable.setChecked(movies);
-        checkable = menu.findItem(R.id.filter_gigs);
-        checkable.setChecked(gigs);
-        checkable = menu.findItem(R.id.filter_music);
-        checkable.setChecked(music);
-        return true;
-    }
 
     public void onNewTaskFloatingButtonPressed(View floatingButton){
         Intent intent = new Intent(this, EditTaskActivity.class);
@@ -229,7 +135,6 @@ public class RecommendationsActivity extends AppCompatActivity {
                         recommendations = new ArrayList<>();
                         RecommendationDateAdapter recommendationDateAdapter = new RecommendationDateAdapter(floatingButton.getContext(), recommendations);
                         listView.setAdapter(recommendationDateAdapter);
-                        resetFilters();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -262,12 +167,23 @@ public class RecommendationsActivity extends AppCompatActivity {
         }, 1000);
 
 }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.filter_menu, menu);
         return true;
     }
+
+    public void populateFilterByCategorySpinner(){
+        categories = new ArrayList<>();
+        for (Category category: Category.getAllCategories()){
+            categories.add(category.getTitle());
+        }
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, categories);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        filterByCategorySpinner.setAdapter(categoryAdapter);
+    }
+
 
 }

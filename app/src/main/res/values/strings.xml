@@ -26,4 +26,5 @@
     <string name="filter_show_urgent_recommendations">Show urgent recommendations</string>
     <string name="generate_test_array">Generate Tests Recommendations</string>
     <string name="filter_recommendations">Filter recoomendations:</string>
+    <string name="filter_by_category_label">Filter by category</string>
 </resources>
