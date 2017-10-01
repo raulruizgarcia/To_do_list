@@ -109,7 +109,6 @@ public class Category {
                 cursor.getString(1));
         // return recommendation
         return category;
-
     }
 
 
@@ -134,6 +133,13 @@ public class Category {
     public void deleteAllCategories(){
         SQLiteDatabase db = Category.sqlRunner.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_CATEGORIES);
+    }
+
+    public static void createDefaultCategory(){
+        SQLiteDatabase db = Category.sqlRunner.getWritableDatabase();
+        String ADD_DEFAULT_CATEGORY = "INSERT INTO " + TABLE_CATEGORIES + " (" + CATEGORIES_COLUMN_TITLE
+                + ") VALUES ( 'Default');";
+        db.execSQL(ADD_DEFAULT_CATEGORY);
     }
 
 }

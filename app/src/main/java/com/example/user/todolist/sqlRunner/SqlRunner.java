@@ -46,8 +46,12 @@ public class SqlRunner extends SQLiteOpenHelper {
                 + "CONSTRAINT title_unique UNIQUE (" + CATEGORIES_COLUMN_TITLE
                 + "))";
 
+        String ADD_DEFAULT_CATEGORY = "INSERT INTO " + TABLE_CATEGORIES + " (" + CATEGORIES_COLUMN_TITLE
+                + ") VALUES ( 'Default');";
+
         db.execSQL(CREATE_RECOMMENDATIONS_TABLE);
         db.execSQL(CREATE_CATEGORIES_TABLE);
+        db.execSQL(ADD_DEFAULT_CATEGORY);
     }
 
     @Override
