@@ -18,11 +18,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.user.todolist.R;
+import com.example.user.todolist.adapter.RecommendationAdapter;
+import com.example.user.todolist.adapter.RecommendationDateAdapter;
 import com.example.user.todolist.category.Category;
 import com.example.user.todolist.sqlRunner.SqlRunner;
 import com.example.user.todolist.recommendations.Recommendation;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 

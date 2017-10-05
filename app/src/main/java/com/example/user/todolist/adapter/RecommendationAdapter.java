@@ -1,4 +1,4 @@
-package com.example.user.todolist.activities;
+package com.example.user.todolist.adapter;
 
 import android.content.Context;
 import android.util.Log;
