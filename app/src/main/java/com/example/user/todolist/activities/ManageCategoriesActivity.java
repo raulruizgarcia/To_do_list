@@ -38,6 +38,7 @@ public class ManageCategoriesActivity extends AppCompatActivity {
             Category category = new Category(categoryTitle);
             category.save();
             newCategoryTitle.setText("");
+            inflateCategoryListView();
         }
     }
 
