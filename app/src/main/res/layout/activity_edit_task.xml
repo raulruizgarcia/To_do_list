@@ -11,7 +11,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context="com.example.user.todolist.activities.EditTaskActivity"
+        tools:context="com.example.user.todolist.activities.EditRecommendationActivity"
         android:focusable="true"
         android:focusableInTouchMode="true">
 

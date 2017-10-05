@@ -3,6 +3,7 @@ package com.example.user.todolist.activities;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -26,9 +27,9 @@ public class ManageCategoriesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manage_categories);
 
         newCategoryTitle = (EditText) findViewById(R.id.categoryNameEditText);
-        categories = Category.getAllCategories();
         categoryListView = (ListView) findViewById(R.id.categoryListView);
         inflateCategoryListView();
+        setListViewListener();
     }
 
     public void onCreateCategoryButtonClicked(View view){
@@ -41,7 +42,20 @@ public class ManageCategoriesActivity extends AppCompatActivity {
     }
 
     public void inflateCategoryListView(){
+        categories = Category.getAllCategories();
         CategoryAdapter categoryAdapter = new CategoryAdapter(this, categories);
         categoryListView.setAdapter(categoryAdapter);
     }
+
+    private void setListViewListener(){
+        categoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Category category = (Category) view.getTag();
+                Category.deleteCategory(category);
+                inflateCategoryListView();
+            }
+        });
+    }
+
 }

@@ -31,6 +31,8 @@ public class SqlRunner extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        String activateForeignKeys = "PRAGMA foreign_keys = ON";
+
         String CREATE_RECOMMENDATIONS_TABLE = "CREATE TABLE " + TABLE_RECOMMENDATIONS + "("
                 + RECOMMENDATIONS_COLUMN_ID + " INTEGER PRIMARY KEY," + RECOMMENDATIONS_COLUMN_TITLE + " TEXT,"
                 + RECOMMENDATIONS_COLUMN_DESCRIPTION + " TEXT,"
@@ -38,7 +40,7 @@ public class SqlRunner extends SQLiteOpenHelper {
                 + RECOMMENDATIONS_COLUMN_CATEGORY_ID + " INTEGER NOT NULL, "
                 + "FOREIGN KEY(" + RECOMMENDATIONS_COLUMN_CATEGORY_ID + ") REFERENCES "
                 + TABLE_CATEGORIES + " (" + CATEGORIES_COLUMN_ID
-                + "))";
+                + ") ON DELETE CASCADE) ";
 
         String CREATE_CATEGORIES_TABLE = "CREATE TABLE " + TABLE_CATEGORIES + "("
                 + CATEGORIES_COLUMN_ID + " INTEGER PRIMARY KEY,"
@@ -49,6 +51,7 @@ public class SqlRunner extends SQLiteOpenHelper {
         String ADD_DEFAULT_CATEGORY = "INSERT INTO " + TABLE_CATEGORIES + " (" + CATEGORIES_COLUMN_TITLE
                 + ") VALUES ( 'Default');";
 
+        db.execSQL(activateForeignKeys);
         db.execSQL(CREATE_RECOMMENDATIONS_TABLE);
         db.execSQL(CREATE_CATEGORIES_TABLE);
         db.execSQL(ADD_DEFAULT_CATEGORY);

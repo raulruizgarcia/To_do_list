@@ -123,8 +123,9 @@ public class Category {
     }
 
 
-    public void deleteCategory(Category category) {
+    public static void deleteCategory(Category category) {
         SQLiteDatabase db = Category.sqlRunner.getWritableDatabase();
+        db.execSQL("PRAGMA foreign_keys = ON");
         db.delete(TABLE_CATEGORIES, CATEGORIES_COLUMN_ID + " = ?",
                 new String[] { String.valueOf(category.getId()) });
         db.close();

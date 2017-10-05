@@ -27,7 +27,7 @@ import com.example.user.todolist.recommendations.Recommendation;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class EditTaskActivity extends AppCompatActivity {
+public class EditRecommendationActivity extends AppCompatActivity {
 
     SqlRunner sqlRunner;
     EditText titleTextEdit;
@@ -149,7 +149,7 @@ public class EditTaskActivity extends AppCompatActivity {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog dialog = new DatePickerDialog(
-                EditTaskActivity.this,
+                EditRecommendationActivity.this,
                 android.R.style.Theme_Holo_Light,
                 myDateSetListener,
                 year, month, day);

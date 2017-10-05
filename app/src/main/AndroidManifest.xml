@@ -18,7 +18,7 @@
         </activity>
 
         <activity
-            android:name=".activities.EditTaskActivity"
+            android:name=".activities.EditRecommendationActivity"
             android:label="@string/edit_activity_label"
             android:parentActivityName=".activities.RecommendationsActivity">
 

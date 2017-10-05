@@ -2,6 +2,7 @@ package com.example.user.todolist.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,6 +42,14 @@ public class RecommendationsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loadActivity();
+//        Do not uncomment unless an upgrade is necessary
+//        upgradeDatabase();
+    }
+
+    private void upgradeDatabase(){
+        SQLiteDatabase db = sqlRunner.getWritableDatabase();
+        int currentVersion = db.getVersion();
+        sqlRunner.onUpgrade(db, currentVersion, currentVersion + 1);
     }
 
     private void loadActivity(){
@@ -134,7 +143,7 @@ public class RecommendationsActivity extends AppCompatActivity {
     }
 
     public void editTask(Recommendation recommendation){
-        Intent intent = new Intent(this, EditTaskActivity.class);
+        Intent intent = new Intent(this, EditRecommendationActivity.class);
         intent.putExtra("id", String.valueOf(recommendation.getId()));
         intent.putExtra("title", recommendation.getTitle());
         intent.putExtra("description", recommendation.getDescription());
@@ -162,7 +171,7 @@ public class RecommendationsActivity extends AppCompatActivity {
 
 
     public void onNewTaskFloatingButtonPressed(View floatingButton){
-        Intent intent = new Intent(this, EditTaskActivity.class);
+        Intent intent = new Intent(this, EditRecommendationActivity.class);
         startActivity(intent);
     }
 

@@ -236,10 +236,11 @@ public class Recommendation implements Comparable<Recommendation> {
         db.close();
     }
 
-    public static void  deleteAll(){
+    public static void deleteAll(){
         SQLiteDatabase db = Recommendation.sqlRunner.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_RECOMMENDATIONS);
     }
+
 
 
 }
