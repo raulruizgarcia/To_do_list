@@ -72,6 +72,7 @@ public class RecommendationsActivity extends AppCompatActivity {
 
     @Override
     protected void onResume(){
+        populateFilterByCategorySpinner();
         super.onResume();
     }
 

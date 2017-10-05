@@ -28,4 +28,8 @@
     <string name="filter_recommendations">Filter recoomendations:</string>
     <string name="filter_by_category_label">Filter by category</string>
     <string name="manage_categories_text">Manage categories</string>
+    <string name="add_new_category_label_text">Add a new category</string>
+    <string name="delete_category_label_text">Delete a category</string>
+    <string name="category_name_label">category name:</string>
+    <string name="add_category_button">Create!</string>
 </resources>
