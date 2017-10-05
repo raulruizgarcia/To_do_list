@@ -28,7 +28,7 @@ public class RecommendationAdapter extends ArrayAdapter<Recommendation> {
 
     public View getView(int position, View recommendationItem, ViewGroup parent){
         if (recommendationItem == null){
-            recommendationItem = LayoutInflater.from(getContext()).inflate(R.layout.activity_recommendations_list_view, parent, false);
+            recommendationItem = LayoutInflater.from(getContext()).inflate(R.layout.adapter_recommendation_deadline, parent, false);
         }
         Recommendation currentRecommendation = getItem(position);
 

@@ -23,7 +23,7 @@ public class RecommendationDateAdapter extends ArrayAdapter<Recommendation> {
 
     public View getView(int position, View recommendationItem, ViewGroup parent){
         if (recommendationItem == null){
-            recommendationItem = LayoutInflater.from(getContext()).inflate(R.layout.activity_list_view, parent, false);
+            recommendationItem = LayoutInflater.from(getContext()).inflate(R.layout.adapter_recommendation, parent, false);
         }
         Recommendation currentRecommendation = getItem(position);
 
