@@ -21,7 +21,8 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.503" />
+        app:layout_constraintHorizontal_bias="0.503"
+        android:layout_marginEnd="8dp" />
 
     <TextView
         android:id="@+id/deleteCategoryLabel"
@@ -46,7 +47,8 @@
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AddNewCategoryLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/AddNewCategoryLabel"
+        android:layout_marginStart="16dp" />
 
     <EditText
         android:id="@+id/categoryNameEditText"
@@ -59,7 +61,8 @@
         android:backgroundTint="@color/colorPrimaryDark"
         android:textCursorDrawable="@drawable/color_cursor"
         app:layout_constraintLeft_toRightOf="@+id/categoryName"
-        app:layout_constraintTop_toBottomOf="@+id/AddNewCategoryLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/AddNewCategoryLabel"
+        android:layout_marginStart="14dp" />
 
     <Button
         android:id="@+id/addCategoryButton"
@@ -67,10 +70,23 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="7dp"
         android:onClick="onCreateCategoryButtonClicked"
         android:text="@string/add_category_button"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoryNameEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/categoryNameEditText"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
+
+    <ListView
+        android:id="@+id/categoryListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deleteCategoryLabel" />
 </android.support.constraint.ConstraintLayout>
