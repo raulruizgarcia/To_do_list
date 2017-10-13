@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.user.todolist.activities.RecommendationsActivity;
+import com.example.user.todolist.category.Category;
 import com.example.user.todolist.sqlRunner.SqlRunner;
 
 import java.text.ParseException;
@@ -239,6 +240,29 @@ public class Recommendation implements Comparable<Recommendation> {
     public static void deleteAll(){
         SQLiteDatabase db = Recommendation.sqlRunner.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_RECOMMENDATIONS);
+    }
+
+    public static ArrayList<Recommendation> getRecommendationsByCategoryId (int categoryId){
+        ArrayList<Recommendation> recommendations = new ArrayList<>();
+        SQLiteDatabase db = Recommendation.sqlRunner.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_RECOMMENDATIONS
+                + " WHERE " + RECOMMENDATIONS_COLUMN_CATEGORY_ID + " = "
+                + categoryId;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Recommendation recommendation = new Recommendation();
+                recommendation.setId(Integer.parseInt(cursor.getString(0)));
+                recommendation.setTitle(cursor.getString(1));
+                recommendation.setDescription(cursor.getString(2));
+                recommendation.setDate(cursor.getString(3));
+                recommendation.setCategoryId(Integer.parseInt(cursor.getString(4)));
+
+                recommendations.add(recommendation);
+            } while (cursor.moveToNext());
+        }
+        // return contact list
+        return recommendations;
     }
 
 

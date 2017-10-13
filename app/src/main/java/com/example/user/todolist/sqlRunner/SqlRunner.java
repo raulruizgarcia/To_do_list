@@ -10,10 +10,10 @@ public class SqlRunner extends SQLiteOpenHelper {
     // Database Version
     private static final int DATABASE_VERSION = 1;
     // Development Database Name
-//    private static final String DATABASE_NAME = "recommendationsdb";
+    private static final String DATABASE_NAME = "recommendationsdb";
 
     // Personal Database Name
-    private static final String DATABASE_NAME = "recommendationsdb_raul";
+//    private static final String DATABASE_NAME = "recommendationsdb_raul";
     // Contacts table name
     private static final String TABLE_RECOMMENDATIONS = "recommendations";
     private static final String TABLE_CATEGORIES = "categories";

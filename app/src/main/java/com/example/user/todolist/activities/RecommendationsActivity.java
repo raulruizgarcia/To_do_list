@@ -66,10 +66,10 @@ public class RecommendationsActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if (position > 0){
-                    Toast.makeText(parentView.getContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
-                    Toast.makeText(parentView.getContext(), categories.get(position), Toast.LENGTH_LONG).show();
+                    Category category = Category.getCategoryByTitle(categories.get(position));
+                    filterRecommendationsByCategory(category.getId());
                 } else {
-                    Toast.makeText(parentView.getContext(), "See all the recommendations", Toast.LENGTH_LONG).show();
+                    displayRecommendations();
                 }
             }
 
@@ -118,6 +118,7 @@ public class RecommendationsActivity extends AppCompatActivity {
             }
         }
         recommendations = result;
+        Collections.sort(recommendations);
         RecommendationAdapter recommendationAdapter = new RecommendationAdapter(this, recommendations);
         listView.setAdapter(recommendationAdapter);
 
